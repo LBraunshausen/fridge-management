@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="fridge_management.Views.AboutPage"
+             x:Class="fridge_management.Views.FridgeItemsPage"
              xmlns:vm="clr-namespace:fridge_management.ViewModels"
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
-        <vm:AboutViewModel />
+        <vm:FridgeItemsViewModel />
     </ContentPage.BindingContext>
     
     <ContentPage.Resources>
