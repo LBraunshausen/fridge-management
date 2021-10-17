@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="+" Command="{Binding AddCommand}" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>

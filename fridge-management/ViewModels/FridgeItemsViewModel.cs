@@ -1,4 +1,5 @@
 ﻿using fridge_management.Models;
+using fridge_management.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace fridge_management.ViewModels
 
         private async void Add()
         {
-            
+            await Shell.Current.GoToAsync(nameof(NewFridgeItemPage));
         }
     }
 }

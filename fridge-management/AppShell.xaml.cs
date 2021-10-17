@@ -11,6 +11,7 @@ namespace fridge_management
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(NewFridgeItemPage), typeof(NewFridgeItemPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
