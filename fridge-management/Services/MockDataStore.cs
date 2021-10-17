@@ -6,33 +6,33 @@ using System.Threading.Tasks;
 
 namespace fridge_management.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<FridgeItem>
     {
-        readonly List<Item> items;
+        readonly List<FridgeItem> items;
 
         public MockDataStore()
         {
-            items = new List<Item>()
+            items = new List<FridgeItem>()
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item" },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item"}
+                new FridgeItem { Id = Guid.NewGuid().ToString(), Text = "First item" },
+                new FridgeItem { Id = Guid.NewGuid().ToString(), Text = "Second item"},
+                new FridgeItem { Id = Guid.NewGuid().ToString(), Text = "Third item"},
+                new FridgeItem { Id = Guid.NewGuid().ToString(), Text = "Fourth item"},
+                new FridgeItem { Id = Guid.NewGuid().ToString(), Text = "Fifth item"},
+                new FridgeItem { Id = Guid.NewGuid().ToString(), Text = "Sixth item"}
             };
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(FridgeItem item)
         {
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(FridgeItem item)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var oldItem = items.Where((FridgeItem arg) => arg.Id == item.Id).FirstOrDefault();
             items.Remove(oldItem);
             items.Add(item);
 
@@ -41,18 +41,18 @@ namespace fridge_management.Services
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
+            var oldItem = items.Where((FridgeItem arg) => arg.Id == id).FirstOrDefault();
             items.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<FridgeItem> GetItemAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<FridgeItem>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }
