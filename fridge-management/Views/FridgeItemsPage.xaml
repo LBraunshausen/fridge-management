@@ -19,7 +19,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding fridgeItems}">
+    <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding item}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <StackLayout>
