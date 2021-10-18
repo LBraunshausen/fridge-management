@@ -20,9 +20,8 @@ namespace fridge_management.Services
             // Get an absolute path to the database file
             var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Fridge.db");
 
-            db = new SQLiteAsyncConnection(databasePath);
-
-            await db.CreateTableAsync<FridgeItem>();
+            db = new SQLiteAsyncConnection(databasePath);            
+            await db.CreateTableAsync<FridgeItem>();            
         }
 
         public static async Task AddFridgeItem(string text, DateTime expirationDate)
@@ -30,6 +29,7 @@ namespace fridge_management.Services
             await Init();
             var item = new FridgeItem
             {
+                Id = 1,
                 Text = text,
                 ExpirationDate = expirationDate
             };
