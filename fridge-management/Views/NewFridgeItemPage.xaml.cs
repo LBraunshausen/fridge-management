@@ -1,4 +1,5 @@
-﻿using System;
+﻿using fridge_management.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace fridge_management.Views
     {
         public NewFridgeItemPage()
         {
-            InitializeComponent();
+            InitializeComponent();                      
         }
-}
+    }
 }
