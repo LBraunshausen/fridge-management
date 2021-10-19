@@ -19,9 +19,11 @@ namespace fridge_management.ViewModels
         public FridgeItemsViewModel()
         {
             Title = "Kühlschrankinhalt";
-
             AddCommand = new Command(Add);
+            FridgeItem = new ObservableRangeCollection<FridgeItem>();
             Load();
+
+
         }
 
         private async void Add()
@@ -31,9 +33,9 @@ namespace fridge_management.ViewModels
         public async Task Load()
         {            
             IsBusy = true;
-            //FridgeItem.Clear();
-            var fridgeItems = FridgeItemService.GetFridgeItem();
-            FridgeItem.AddRange((System.Collections.Generic.IEnumerable<FridgeItem>)fridgeItems);            
+            FridgeItem.Clear();
+            var fridgeItems = await FridgeItemService.GetFridgeItem();
+            FridgeItem.AddRange(fridgeItems);
             IsBusy = false;
         }
     }
