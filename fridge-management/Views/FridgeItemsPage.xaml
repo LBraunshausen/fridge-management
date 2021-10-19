@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fridge_management.Views.FridgeItemsPage"
-             xmlns:vm="clr-namespace:fridge_management.ViewModels"
+             xmlns:vm="clr-namespace:fridge_management.ViewModels"             
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
@@ -18,17 +18,20 @@
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItem}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <Label Text="{Binding Text}"/>
-                    <Label />
-                    <Button />
-                </StackLayout>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <StackLayout>
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItem}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Text}" />
+                            <Label Text="{Binding ExpirationDate}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
 
 </ContentPage>
