@@ -20,13 +20,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItem}">
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItem}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding Text}" />
-                            <Label Text="{Binding ExpirationDate}" />
+                            <Label Text="{Binding ExpirationDate, StringFormat='{0:dd.mm.yyyy}'}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

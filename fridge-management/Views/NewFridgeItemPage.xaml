@@ -15,7 +15,7 @@
             <Label Text="Produktname:" Margin="10,5,0,0"/>
             <Entry Text="{Binding FridgeItem.Text}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
             <Label Text="Mindesthaltbarkeitsdatum:" Margin="10,0"/>
-            <DatePicker Margin="10,5,0,0" />
+            <DatePicker Margin="10,5,0,0" Date="{Binding FridgeItem.ExpirationDate}"/>
             <Button Text="Hinzufügen" Command="{Binding AddCommand}" Margin="10,0"/>
         </StackLayout>
     </ContentPage.Content>

@@ -20,7 +20,7 @@ namespace fridge_management.ViewModels
         public NewFridgeItemViewModel()
         {
             Title = "Inhalt hinzufügen";
-            AddCommand = new Command(Add);            
+            AddCommand = new Command(Add);
             FridgeItem = new FridgeItem();
         }
         
@@ -52,7 +52,7 @@ namespace fridge_management.ViewModels
         {
             await FridgeItemService.AddFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
-            Application.Current.MainPage.Navigation.PopAsync();
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }
