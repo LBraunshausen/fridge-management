@@ -16,6 +16,19 @@
             <Entry Text="{Binding FridgeItem.Text}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
             <Label Text="Mindesthaltbarkeitsdatum:" Margin="10,0"/>
             <DatePicker Margin="10,5,0,0" Date="{Binding FridgeItem.ExpirationDate}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Text="Menge:" Margin="10,0"/>
+                <Entry Text="{Binding Value}" BindingContext="{x:Reference AmountStepper}" Margin="10,0" Grid.Column="0" Grid.Row="1"/>
+                <Stepper x:Name="AmountStepper" Minimum="0" Increment="1" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
             <Button Text="Hinzufügen" Command="{Binding AddCommand}" Margin="10,0"/>
         </StackLayout>
     </ContentPage.Content>
