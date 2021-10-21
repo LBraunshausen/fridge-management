@@ -15,12 +15,14 @@ namespace fridge_management.ViewModels
     public class FridgeItemsViewModel : BaseViewModel
     {
         public ObservableRangeCollection<FridgeItem> FridgeItem { get; set; }
-        public Command AddCommand { get; }                
+        public Command AddCommand { get; }
+        public Command RemoveCommand { get; }        
 
         public FridgeItemsViewModel()
         {
             Title = "Kühlschrankinhalt";
-            AddCommand = new Command(Add);            
+            AddCommand = new Command(Add);
+            RemoveCommand = new Command(Remove);
             FridgeItem = new ObservableRangeCollection<FridgeItem>();
             Load();
 
@@ -35,6 +37,11 @@ namespace fridge_management.ViewModels
         private async void Add()
         {
             await Shell.Current.GoToAsync(nameof(NewFridgeItemPage));
+        }
+
+        private async void Remove()
+        {
+            //await FridgeItemService.DeleteFridgeItem();
         }
 
         public async Task Load()
