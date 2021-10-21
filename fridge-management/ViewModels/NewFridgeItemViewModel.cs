@@ -48,9 +48,21 @@ namespace fridge_management.ViewModels
             }
         }
 
+        public int Amount
+        {
+            get => FridgeItem.Amount;
+            set
+            {
+                if (value == FridgeItem.Amount)
+                    return;
+                FridgeItem.Amount = value;
+                OnPropertyChanged();
+            }
+        }
+
         public async void Add()
         {
-            await FridgeItemService.AddFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate);
+            await FridgeItemService.AddFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate, FridgeItem.Amount);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
