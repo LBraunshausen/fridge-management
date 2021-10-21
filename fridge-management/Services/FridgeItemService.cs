@@ -28,8 +28,7 @@ namespace fridge_management.Services
         {
             await Init();
             var item = new FridgeItem
-            {
-                Id = 1,
+            {                
                 Text = text,
                 ExpirationDate = expirationDate
             };
