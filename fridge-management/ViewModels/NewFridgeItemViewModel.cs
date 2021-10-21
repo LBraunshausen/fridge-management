@@ -50,7 +50,9 @@ namespace fridge_management.ViewModels
 
         public async void Add()
         {
-            await FridgeItemService.AddFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate);     
-        }        
+            await FridgeItemService.AddFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate);
+            MessagingCenter.Send<object, string>("MyApp", "Update", "List");
+            Application.Current.MainPage.Navigation.PopAsync();
+        }
     }
 }
