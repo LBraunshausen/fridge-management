@@ -16,7 +16,21 @@ namespace fridge_management.ViewModels
     {
         public ObservableRangeCollection<FridgeItem> FridgeItem { get; set; }
         public Command AddCommand { get; }
-        public Command RemoveCommand { get; }        
+        public Command RemoveCommand { get; }
+
+
+        private FridgeItem selectedItem;
+        public FridgeItem SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                if (value == selectedItem)
+                    return;
+                selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
 
         public FridgeItemsViewModel()
         {
@@ -41,11 +55,12 @@ namespace fridge_management.ViewModels
 
         private async void Remove()
         {
-            //await FridgeItemService.DeleteFridgeItem();
+            await FridgeItemService.DeleteFridgeItem(selectedItem.Id);
+            Load();
         }
 
         public async Task Load()
-        {            
+        {
             IsBusy = true;
             FridgeItem.Clear();
             var fridgeItems = await FridgeItemService.GetFridgeItem();
