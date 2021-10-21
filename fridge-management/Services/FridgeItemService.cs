@@ -24,13 +24,14 @@ namespace fridge_management.Services
             await db.CreateTableAsync<FridgeItem>();            
         }
 
-        public static async Task AddFridgeItem(string text, DateTime expirationDate)
+        public static async Task AddFridgeItem(string text, DateTime expirationDate, int amount)
         {
             await Init();
             var item = new FridgeItem
             {                
                 Text = text,
-                ExpirationDate = expirationDate
+                ExpirationDate = expirationDate,
+                Amount = amount                
             };
 
             await db.InsertAsync(item);
