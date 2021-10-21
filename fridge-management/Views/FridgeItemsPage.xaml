@@ -11,6 +11,7 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Command="{Binding AddCommand}" />
+        <ToolbarItem Text="-" Command="{Binding RemoveCommand}"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>
