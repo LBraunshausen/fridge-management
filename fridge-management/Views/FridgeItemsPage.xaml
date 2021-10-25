@@ -26,7 +26,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding Text}" />
-                            <Label Text="{Binding ExpirationDate, StringFormat='{0:dd.mm.yyyy}'}" />
+                            <Label Text="{Binding ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
