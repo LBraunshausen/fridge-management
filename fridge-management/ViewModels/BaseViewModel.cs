@@ -10,7 +10,7 @@ namespace fridge_management.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<FridgeItem> DataStore => DependencyService.Get<IDataStore<FridgeItem>>();
 
         bool isBusy = false;
         public bool IsBusy

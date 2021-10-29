@@ -12,8 +12,7 @@ namespace fridge_management
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
+            
             MainPage = new AppShell();
         }
 

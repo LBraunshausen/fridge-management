@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             x:Class="fridge_management.Views.NewFridgeItemPage"
+             xmlns:vm="clr-namespace:fridge_management.ViewModels"
+             x:DataType="vm:NewFridgeItemViewModel"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:NewFridgeItemViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        
+        <StackLayout Orientation="Vertical">
+            <Label Text="Produktname:" Margin="10,5,0,0"/>
+            <Entry Text="{Binding FridgeItem.Text}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Text="Menge:" Margin="10,0"/>
+                <Entry Text="{Binding Amount}" Margin="10,0" Grid.Column="0" Grid.Row="1"/>
+                <!--<Stepper x:Name="AmountStepper" Minimum="0" Increment="1" Grid.Column="1" Grid.Row="1"/>-->
+                <Label Text="Mindesthaltbarkeitsdatum:" Margin="10,0" Grid.Column="1" Grid.Row="0"/>
+                <DatePicker x:Name="DatePicker" Margin="10,5,0,0" Date="{Binding FridgeItem.ExpirationDate}" Format="dd.MM.yyyy" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+            <Button Text="Hinzufügen" Command="{Binding AddCommand}" Margin="10,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
