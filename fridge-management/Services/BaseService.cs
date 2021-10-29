@@ -28,7 +28,7 @@ namespace fridge_management.Services
             await db.InsertAsync(data);
         }
 
-        public static async Task DeleteFridgeItem(int id)
+        public static async Task Delete(int id)
         {
             await Init();
 
