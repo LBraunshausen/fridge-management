@@ -1,21 +1,29 @@
-﻿using fridge_management.ViewModels;
+﻿using fridge_management.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace fridge_management.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewFridgeItemPage : ContentPage
+    [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]
+    public partial class EditFridgeItemPage : ContentPage
     {
-        public NewFridgeItemPage()
+        public EditFridgeItemPage()
         {
-            InitializeComponent();                      
+            InitializeComponent();
+        }
+
+        public int FridgeItemId { get; set; }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = await FridgeItemService.GetFridgeItem(FridgeItemId);
+            Console.WriteLine("test");
         }
     }
 }

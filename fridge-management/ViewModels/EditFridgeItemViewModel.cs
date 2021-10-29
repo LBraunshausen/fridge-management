@@ -1,30 +1,21 @@
-﻿using System;
+﻿using fridge_management.Models;
+using fridge_management.Services;
+using MvvmHelpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
-using fridge_management.Services;
-using fridge_management.Models;
-using System.ComponentModel;
-using MvvmHelpers;
-using System.Threading.Tasks;
 
 namespace fridge_management.ViewModels
 {
-    class NewFridgeItemViewModel : BindableObject
+    [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]
+    class EditFridgeItemViewModel : BindableObject
     {
-        public Command AddCommand { get; }
+        public string Title { get; set; }
+        public Command EditCommand { get; }
         public FridgeItem FridgeItem { get; set; }
         public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
-        public string Title { get; set; }
-
-        public NewFridgeItemViewModel()
-        {
-            Title = "Inhalt hinzufügen";
-            AddCommand = new Command(Add);
-            FridgeItem = new FridgeItem();
-            ExpirationDate = DateTime.Now;
-        }
-        
+        public int FridgeItemId { get; set; }
         public string Text
         {
             get => FridgeItem.Text;
@@ -61,9 +52,16 @@ namespace fridge_management.ViewModels
             }
         }
 
-        public async void Add()
+        public EditFridgeItemViewModel()
         {
-            await FridgeItemService.AddFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate, FridgeItem.Amount);
+            Title = "Inhalt bearbeiten";
+            EditCommand = new Command(Edit);
+            FridgeItem = new FridgeItem();
+        }
+
+        public async void Edit()
+        {
+            await FridgeItemService.EditFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate, FridgeItem.Amount);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }

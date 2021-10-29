@@ -17,6 +17,7 @@ namespace fridge_management.ViewModels
         public ObservableRangeCollection<FridgeItem> FridgeItem { get; set; }
         public Command AddCommand { get; }
         public Command RemoveCommand { get; }
+        public Command EditCommand { get; }
 
 
         private FridgeItem selectedItem;
@@ -37,6 +38,7 @@ namespace fridge_management.ViewModels
             Title = "Kühlschrankinhalt";
             AddCommand = new Command(Add);
             RemoveCommand = new Command(Remove);
+            EditCommand = new Command(Edit);
             FridgeItem = new ObservableRangeCollection<FridgeItem>();
             Load();
 
@@ -59,11 +61,18 @@ namespace fridge_management.ViewModels
             Load();
         }
 
+        private async void Edit()
+        {
+            if (SelectedItem == null)
+                return;
+            await Shell.Current.GoToAsync($"{nameof(EditFridgeItemPage)}?FridgeItemId={selectedItem.Id}");
+        }
+
         public async Task Load()
         {
             IsBusy = true;
             FridgeItem.Clear();
-            var fridgeItems = await FridgeItemService.GetFridgeItem();
+            var fridgeItems = await FridgeItemService.GetFridgeItems();
             FridgeItem.AddRange(fridgeItems);
             IsBusy = false;
         }

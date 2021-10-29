@@ -9,13 +9,12 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace fridge_management.Views
-{
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+{	
     public partial class NewFridgeItemPage : ContentPage
     {
         public NewFridgeItemPage()
         {
-            InitializeComponent();                      
+            InitializeComponent();
         }
     }
 }
