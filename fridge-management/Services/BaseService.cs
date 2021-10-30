@@ -42,7 +42,7 @@ namespace fridge_management.Services
             await db.UpdateAsync(data);
         }
 
-        public static async Task<IEnumerable<T>> Get()
+        public static async Task<IEnumerable<T>> GetItems()
         {
             await Init();
 
