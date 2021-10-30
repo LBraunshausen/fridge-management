@@ -9,7 +9,7 @@ using fridge_management.Models;
 
 namespace fridge_management.Services
 {
-    public class ShoppingListService
+    public class FridgeItemService
     {
         static SQLiteAsyncConnection db;
         static async Task Init()
@@ -27,7 +27,7 @@ namespace fridge_management.Services
         public static async Task AddFridgeItem(string text, DateTime expirationDate, int amount)
         {
             await Init();
-            var item = new FridgeItem
+            var item = new Item
             {
                 Text = text,
                 ExpirationDate = expirationDate,
@@ -41,14 +41,14 @@ namespace fridge_management.Services
         {
             await Init();
 
-            await db.DeleteAsync<FridgeItem>(id);
+            await db.DeleteAsync<Item>(id);
         }
 
         public static async Task EditFridgeItem(string text, DateTime expirationDate, int amount)
         {
             await Init();
 
-            var item = new FridgeItem
+            var item = new Item
             {
                 //Id = id,
                 Text = text,
