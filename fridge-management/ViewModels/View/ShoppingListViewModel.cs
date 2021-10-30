@@ -14,14 +14,14 @@ namespace fridge_management.ViewModels
 {
     public class ShoppingListViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<FridgeItem> FridgeItem { get; set; }
+        public ObservableRangeCollection<Item> Items { get; set; }
         public Command AddCommand { get; }
         public Command RemoveCommand { get; }
         public Command EditCommand { get; }
 
 
-        private FridgeItem selectedItem;
-        public FridgeItem SelectedItem
+        private Item selectedItem;
+        public Item SelectedItem
         {
             get => selectedItem;
             set
@@ -39,7 +39,7 @@ namespace fridge_management.ViewModels
             AddCommand = new Command(Add);
             RemoveCommand = new Command(Remove);
             EditCommand = new Command(Edit);
-            FridgeItem = new ObservableRangeCollection<FridgeItem>();
+            Items = new ObservableRangeCollection<Item>();
             Load();
 
             MessagingCenter.Subscribe<object, string>("MyApp", "Update",
@@ -52,12 +52,12 @@ namespace fridge_management.ViewModels
 
         private async void Add()
         {
-            await Shell.Current.GoToAsync(nameof(NewFridgeItemPage));
+            await Shell.Current.GoToAsync(nameof(NewShoppingListItemPage));
         }
 
         private async void Remove()
         {
-            await FridgeItemService.DeleteFridgeItem(selectedItem.Id);
+            await BaseService<Item>.Delete(selectedItem.Id);
             Load();
         }
 
@@ -65,15 +65,15 @@ namespace fridge_management.ViewModels
         {
             if (SelectedItem == null)
                 return;
-            await Shell.Current.GoToAsync($"{nameof(EditFridgeItemPage)}?FridgeItemId={selectedItem.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListItemPage)}?ItemId={selectedItem.Id}");
         }
 
         public async Task Load()
         {
             IsBusy = true;
-            FridgeItem.Clear();
-            var fridgeItems = await FridgeItemService.GetFridgeItems();
-            FridgeItem.AddRange(fridgeItems);
+            Items.Clear();
+            var items = await BaseService<Item>.GetItems();
+            Items.AddRange(items);
             IsBusy = false;
         }
     }

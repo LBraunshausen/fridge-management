@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 
 namespace fridge_management.Views
 {
-    public partial class FridgeItemsPage : ContentPage
+    public partial class ShoppingListItemsPage : ContentPage
     {
-        public FridgeItemsPage()
+        public ShoppingListItemsPage()
         {
             InitializeComponent();
         }
