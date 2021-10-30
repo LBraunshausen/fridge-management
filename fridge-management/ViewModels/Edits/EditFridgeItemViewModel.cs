@@ -2,8 +2,6 @@
 using fridge_management.Services;
 using MvvmHelpers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace fridge_management.ViewModels

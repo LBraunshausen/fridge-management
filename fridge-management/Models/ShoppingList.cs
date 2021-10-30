@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using System;
 using System.Collections.Generic;
 
 namespace fridge_management.Models

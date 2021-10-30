@@ -1,11 +1,10 @@
-﻿using SQLite;
+﻿using fridge_management.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
-using fridge_management.Models;
 
 namespace fridge_management.Services
 {
@@ -31,7 +30,7 @@ namespace fridge_management.Services
             {
                 Text = text,
                 ExpirationDate = expirationDate,
-                Amount = amount                
+                Amount = amount
             };
 
             await db.InsertAsync(item);

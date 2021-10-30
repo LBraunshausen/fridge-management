@@ -20,7 +20,7 @@ namespace fridge_management.ViewModels
             FridgeItem = new Item();
             ExpirationDate = DateTime.Now;
         }
-        
+
         public string Text
         {
             get => FridgeItem.Text;

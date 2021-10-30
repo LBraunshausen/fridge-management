@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using fridge_management.Models;
 using fridge_management.Services;
-using fridge_management.Models;
-using System.ComponentModel;
 using MvvmHelpers;
-using System.Threading.Tasks;
+using System;
+using Xamarin.Forms;
 
 namespace fridge_management.ViewModels
 {
@@ -19,12 +15,12 @@ namespace fridge_management.ViewModels
 
         public NewShoppingListItemViewModel()
         {
-            Title = "Inhalt hinzufügen";
+            Title = "Zutat zur Liste hinzufügen";
             AddCommand = new Command(Add);
             curItem = new Item();
             ExpirationDate = DateTime.Now;
         }
-        
+
         public string Text
         {
             get => curItem.Text;

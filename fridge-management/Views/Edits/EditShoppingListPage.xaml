@@ -13,7 +13,7 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <Label Text="Produktname:" Margin="10,5,0,0"/>
-            <Entry Text="{Binding Item}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
+            <Entry Text="{Binding curItem}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -24,11 +24,11 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label Text="Menge:" Margin="10,0"/>
-                <Entry Text="{Binding Amount}" Margin="10,0" Grid.Column="0" Grid.Row="1"/>
+                <Entry Text="{Binding curItem.Amount}" Margin="10,0" Grid.Column="0" Grid.Row="1"/>
                 <!--<Stepper x:Name="AmountStepper" Minimum="0" Increment="1" Grid.Column="1" Grid.Row="1"/>-->
                 <Label Text="Mindesthaltbarkeitsdatum:" Margin="10,0" Grid.Column="1" Grid.Row="0"/>
 
-                <DatePicker x:Name="DatePicker" Margin="10,5,0,0" Date="{Binding Item.ExpirationDate}" Format="dd.MM.yyyy" Grid.Column="1" Grid.Row="1"/>
+                <DatePicker x:Name="DatePicker" Margin="10,5,0,0" Date="{Binding curItem.ExpirationDate}" Format="dd.MM.yyyy" Grid.Column="1" Grid.Row="1"/>
             </Grid>
             <Button Text="Bearbeiten" Command="{Binding EditCommand}" Margin="10,0"/>
         </StackLayout>
