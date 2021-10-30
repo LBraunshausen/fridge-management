@@ -12,7 +12,7 @@ namespace fridge_management.Views
             InitializeComponent();
         }
 
-        //public int FridgeItemId { get; set; }
+        public int FridgeItemId { get; set; }
 
         protected override async void OnAppearing()
         {

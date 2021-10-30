@@ -65,7 +65,7 @@ namespace fridge_management.ViewModels
         {
             if (SelectedItem == null)
                 return;
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListItemPage)}?ItemId={selectedItem.Id}");
+            //await Shell.Current.GoToAsync($"{nameof(EditShoppingListItemPage)}?ItemId={selectedItem.Id}");
         }
 
         public async Task Load()
