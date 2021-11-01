@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="fridge_management.Views.FridgeItemsPage"
+             xmlns:vm="clr-namespace:fridge_management.ViewModels"  
+             x:DataType="vm:FridgeItemsViewModel"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:FridgeItemsViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Command="{Binding AddCommand}" />
+        <ToolbarItem Text="-" Command="{Binding RemoveCommand}"/>
+        <ToolbarItem Command="{Binding EditCommand}" Icon="edit_icon.png"/>
+        
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding SelectedItem.Text}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="10,0"/>
+                            <Label Text="{Binding SelectedItem.ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
+                            <Label Text="{Binding SelectedItem.Amount, StringFormat='{0:}x'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+
+</ContentPage>

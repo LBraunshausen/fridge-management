@@ -1,8 +1,4 @@
-﻿using fridge_management.Services;
-using fridge_management.Views;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace fridge_management
 {
@@ -12,7 +8,7 @@ namespace fridge_management
         public App()
         {
             InitializeComponent();
-            
+
             MainPage = new AppShell();
         }
 

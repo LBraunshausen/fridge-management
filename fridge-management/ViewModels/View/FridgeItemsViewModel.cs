@@ -2,11 +2,7 @@
 using fridge_management.Services;
 using fridge_management.Views;
 using MvvmHelpers;
-using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 
@@ -14,14 +10,14 @@ namespace fridge_management.ViewModels
 {
     public class FridgeItemsViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<FridgeItem> FridgeItem { get; set; }
+        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
         public Command AddCommand { get; }
         public Command RemoveCommand { get; }
         public Command EditCommand { get; }
 
 
-        private FridgeItem selectedItem;
-        public FridgeItem SelectedItem
+        private Item selectedItem;
+        public Item SelectedItem
         {
             get => selectedItem;
             set
@@ -39,7 +35,7 @@ namespace fridge_management.ViewModels
             AddCommand = new Command(Add);
             RemoveCommand = new Command(Remove);
             EditCommand = new Command(Edit);
-            FridgeItem = new ObservableRangeCollection<FridgeItem>();
+            FridgeItems = new ObservableRangeCollection<FridgeItem>();
             Load();
 
             MessagingCenter.Subscribe<object, string>("MyApp", "Update",
@@ -57,7 +53,7 @@ namespace fridge_management.ViewModels
 
         private async void Remove()
         {
-            await FridgeItemService.DeleteFridgeItem(selectedItem.Id);
+            await BaseService<FridgeItem>.Delete(selectedItem.Id);
             Load();
         }
 
@@ -71,9 +67,9 @@ namespace fridge_management.ViewModels
         public async Task Load()
         {
             IsBusy = true;
-            FridgeItem.Clear();
-            var fridgeItems = await FridgeItemService.GetFridgeItems();
-            FridgeItem.AddRange(fridgeItems);
+            FridgeItems.Clear();
+            var fridgeItems = await BaseService<FridgeItem>.GetItems();
+            FridgeItems.AddRange(fridgeItems);
             IsBusy = false;
         }
     }
