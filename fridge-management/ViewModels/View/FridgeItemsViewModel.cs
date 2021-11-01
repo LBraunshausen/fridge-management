@@ -53,7 +53,7 @@ namespace fridge_management.ViewModels
 
         private async void Remove()
         {
-            await FridgeItemService.DeleteFridgeItem(selectedItem.Id);
+            await BaseService<FridgeItem>.Delete(selectedItem.Id);
             Load();
         }
 
@@ -68,7 +68,7 @@ namespace fridge_management.ViewModels
         {
             IsBusy = true;
             FridgeItems.Clear();
-            var fridgeItems = await FridgeItemService.GetFridgeItems();
+            var fridgeItems = await BaseService<FridgeItem>.GetItems();
             FridgeItems.AddRange(fridgeItems);
             IsBusy = false;
         }

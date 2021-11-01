@@ -11,41 +11,41 @@ namespace fridge_management.ViewModels
     {
         public string Title { get; set; }
         public Command EditCommand { get; }
-        public Item FridgeItem { get; set; }
-        public ObservableRangeCollection<Item> FridgeItems { get; set; }
+        public FridgeItem curItem { get; set; }
+        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
         public int FridgeItemId { get; set; }
         public string Text
         {
-            get => FridgeItem.Text;
+            get => curItem.Text;
             set
             {
-                if (value == FridgeItem.Text)
+                if (value == curItem.Text)
                     return;
-                FridgeItem.Text = value;
+                curItem.Text = value;
                 OnPropertyChanged();
             }
         }
 
         public DateTime ExpirationDate
         {
-            get => FridgeItem.ExpirationDate;
+            get => curItem.ExpirationDate;
             set
             {
-                if (value == FridgeItem.ExpirationDate)
+                if (value == curItem.ExpirationDate)
                     return;
-                FridgeItem.ExpirationDate = value;
+                curItem.ExpirationDate = value;
                 OnPropertyChanged();
             }
         }
 
         public int Amount
         {
-            get => FridgeItem.Amount;
+            get => curItem.Amount;
             set
             {
-                if (value == FridgeItem.Amount)
+                if (value == curItem.Amount)
                     return;
-                FridgeItem.Amount = value;
+                curItem.Amount = value;
                 OnPropertyChanged();
             }
         }
@@ -54,12 +54,12 @@ namespace fridge_management.ViewModels
         {
             Title = "Inhalt bearbeiten";
             EditCommand = new Command(Edit);
-            FridgeItem = new Item();
+            curItem = new FridgeItem();
         }
 
         public async void Edit()
         {
-            await FridgeItemService.EditFridgeItem((string)FridgeItem.Text, (DateTime)FridgeItem.ExpirationDate, (int)FridgeItem.Amount);
+            await BaseService<FridgeItem>.Edit(curItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
