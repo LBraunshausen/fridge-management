@@ -16,8 +16,8 @@ namespace fridge_management.ViewModels
         public Command EditCommand { get; }
 
 
-        private Item selectedItem;
-        public Item SelectedItem
+        private FridgeItem selectedItem;
+        public FridgeItem SelectedItem
         {
             get => selectedItem;
             set

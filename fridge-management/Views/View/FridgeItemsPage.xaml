@@ -23,7 +23,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}" SelectedItem="{Binding FridgeItem, Mode=TwoWay}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -36,9 +36,9 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding SelectedItem.Text}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="10,0"/>
-                            <Label Text="{Binding SelectedItem.ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
-                            <Label Text="{Binding SelectedItem.Amount, StringFormat='{0:}x'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
+                            <Label Text="{Binding Text}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="10,0"/>
+                            <Label Text="{Binding ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
+                            <Label Text="{Binding Amount, StringFormat='{0:}x'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
