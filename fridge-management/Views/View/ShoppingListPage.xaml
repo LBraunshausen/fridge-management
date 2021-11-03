@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fridge_management.Views.ShoppingListPage"
-             xmlns:vm="clr-namespace:fridge_management.ViewModels"  
-             x:DataType="vm:ShoppingListViewModel"
+             xmlns:vm="clr-namespace:fridge_management.ViewModels"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -36,9 +35,9 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Items, Source=Text}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="20,0"/>
-                            <Label Text="{Binding Items, Source=ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
-                            <Label Text="{Binding Items, Source=Amount, StringFormat='{0:}x'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
+                            <Label Text="{Binding Text}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="20,0"/>
+                            <Label Text="{Binding ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
+                            <Label Text="{Binding Amount, StringFormat='{0:}x'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
