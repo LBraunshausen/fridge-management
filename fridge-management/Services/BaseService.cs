@@ -43,7 +43,6 @@ namespace fridge_management.Services
         }
 
         public static async Task<IEnumerable<T>> GetItems()
-
         {
             await Init();
 

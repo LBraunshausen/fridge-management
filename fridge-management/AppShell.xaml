@@ -82,6 +82,10 @@
         <ShellContent Route="FridgeItemsPage" ContentTemplate="{DataTemplate local:FridgeItemsPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Einkaufsliste" Icon="icon_about.png">
+        <ShellContent Route="ShoppingListPage" ContentTemplate="{DataTemplate local:ShoppingListPage}" />
+    </FlyoutItem>
+
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <!--<MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>-->

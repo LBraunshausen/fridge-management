@@ -23,38 +23,25 @@ namespace fridge_management.Services
             await db.CreateTableAsync<FridgeItem>();
         }
 
-        public static async Task AddFridgeItem(string text, DateTime expirationDate, int amount)
+        public static async Task AddFridgeItem(FridgeItem fridgeItem)
         {
             await Init();
-            var item = new Item
-            {
-                Text = text,
-                ExpirationDate = expirationDate,
-                Amount = amount
-            };
 
-            await db.InsertAsync(item);
+            await db.InsertAsync(fridgeItem);
         }
 
         public static async Task DeleteFridgeItem(int id)
         {
             await Init();
 
-            await db.DeleteAsync<Item>(id);
+            await db.DeleteAsync<FridgeItem>(id);
         }
 
-        public static async Task EditFridgeItem(string text, DateTime expirationDate, int amount)
+        public static async Task EditFridgeItem(FridgeItem fridgeItem)
         {
             await Init();
 
-            var item = new Item
-            {
-                //Id = id,
-                Text = text,
-                ExpirationDate = expirationDate,
-                Amount = amount
-            };
-            await db.UpdateAsync(item);
+            await db.UpdateAsync(fridgeItem);
         }
 
         public static async Task<IEnumerable<FridgeItem>> GetFridgeItems()
