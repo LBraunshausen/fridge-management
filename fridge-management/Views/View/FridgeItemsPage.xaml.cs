@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace fridge_management.Views
 {
@@ -6,7 +7,7 @@ namespace fridge_management.Views
     {
         public FridgeItemsPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
     }
 }

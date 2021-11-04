@@ -1,19 +1,28 @@
 ﻿using fridge_management.Models;
 using fridge_management.Services;
 using MvvmHelpers;
+using SQLite;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace fridge_management.ViewModels
 {
     [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]
-    class EditFridgeItemViewModel : BindableObject
+    class EditFridgeItemViewModel : BaseViewModel
     {
         public string Title { get; set; }
         public Command EditCommand { get; }
         public FridgeItem curItem { get; set; }
         public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
-        public int FridgeItemId { get; set; }
+        int fridgeItemId;
+        public int FridgeItemId {
+            get => fridgeItemId;
+            set {
+                SetProperty(ref fridgeItemId, value);
+                GetItem();                
+            }
+        }
         public string Text
         {
             get => curItem.Text;
@@ -55,6 +64,12 @@ namespace fridge_management.ViewModels
             Title = "Inhalt bearbeiten";
             EditCommand = new Command(Edit);
             curItem = new FridgeItem();
+        }
+
+        public async Task GetItem()
+        {
+            var fridgeItem = await BaseService<FridgeItem>.GetById(FridgeItemId);
+            curItem = fridgeItem;            
         }
 
         public async void Edit()
