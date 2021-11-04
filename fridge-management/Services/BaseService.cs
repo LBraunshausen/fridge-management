@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using fridge_management.Models;
+using SQLite;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using Xamarin.Essentials;
 
 namespace fridge_management.Services
 {
-    public class BaseService<T> where T : new()
+    public class BaseService<T> where T : IModel, new()
     {
         static SQLiteAsyncConnection db;
         static async Task Init()
@@ -50,10 +51,10 @@ namespace fridge_management.Services
             return item;
         }
 
-        public static async Task<T> Get(int id)
+        public static async Task<IEnumerable<T>> Get(int id)
         {
-            await Init();
-            var item = await db.Table<T>().ElementAtAsync(id);
+            Init();
+            var item = await db.QueryAsync<T>($"select * from {typeof(T).Name} where Id == {id}");
             return item;
         }
     }
