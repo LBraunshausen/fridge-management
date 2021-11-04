@@ -3,7 +3,7 @@ using System;
 
 namespace fridge_management.Models
 {
-    public class FridgeItem
+    public class FridgeItem : IModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
