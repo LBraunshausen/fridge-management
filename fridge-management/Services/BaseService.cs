@@ -51,11 +51,11 @@ namespace fridge_management.Services
             return item;
         }
 
-        public static async Task<IEnumerable<T>> GetById(int id)
+        public static async Task<T> GetById(int id)
         {
             Init();
             var item = await db.QueryAsync<T>($"select * from {typeof(T).Name} where Id == {id}");
-            return item;
+            return item[0];
         }
     }
 }
