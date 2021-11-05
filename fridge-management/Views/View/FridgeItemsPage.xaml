@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fridge_management.Views.FridgeItemsPage"
-             xmlns:vm="clr-namespace:fridge_management.ViewModels"  
-             x:DataType="vm:FridgeItemsViewModel"
+             xmlns:vm="clr-namespace:fridge_management.ViewModels"               
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
@@ -23,7 +22,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}" SelectedItem="{Binding FridgeItem, Mode=TwoWay}" >
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -45,6 +44,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
-
 </ContentPage>
