@@ -13,8 +13,7 @@ namespace fridge_management.ViewModels
     {
         public string Title { get; set; }
         public Command EditCommand { get; }
-        private FridgeItem curItem;
-        //public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
+        private FridgeItem curItem;        
         int fridgeItemId;
         public int FridgeItemId {
             get => fridgeItemId;
