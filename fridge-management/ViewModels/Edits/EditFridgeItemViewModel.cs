@@ -13,8 +13,8 @@ namespace fridge_management.ViewModels
     {
         public string Title { get; set; }
         public Command EditCommand { get; }
-        public FridgeItem curItem { get; set; }
-        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
+        private FridgeItem curItem;
+        //public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
         int fridgeItemId;
         public int FridgeItemId {
             get => fridgeItemId;
@@ -59,6 +59,18 @@ namespace fridge_management.ViewModels
             }
         }
 
+        public FridgeItem CurItem
+        {
+            get => curItem;
+            set
+            {
+                if (value == curItem)
+                    return;
+                curItem = value;
+                OnPropertyChanged();
+            }
+        }
+
         public EditFridgeItemViewModel()
         {
             Title = "Inhalt bearbeiten";
@@ -69,7 +81,7 @@ namespace fridge_management.ViewModels
         public async Task GetItem()
         {
             var fridgeItem = await BaseService<FridgeItem>.GetById(FridgeItemId);
-            curItem = fridgeItem;            
+            CurItem = fridgeItem;
         }
 
         public async void Edit()
