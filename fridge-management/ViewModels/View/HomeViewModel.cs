@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using fridge_management.Models;
@@ -29,7 +30,7 @@ namespace fridge_management.ViewModels
 
         public HomeViewModel()
         {
-            Title = "Kühlschrankinhalt";
+            Title = "Startseite";
             FridgeItems = new ObservableRangeCollection<FridgeItem>();
             Load();
         }
@@ -40,7 +41,15 @@ namespace fridge_management.ViewModels
             IsBusy = true;
             FridgeItems.Clear();
             var fridgeItems = await BaseService<FridgeItem>.GetItems();
-            FridgeItems.AddRange(fridgeItems);
+
+            DateTime today = DateTime.Today;
+            IEnumerable<FridgeItem> expiredItems = null;
+
+            foreach (FridgeItem item in fridgeItems)
+            {
+                expiredItems = fridgeItems.Where(i => i.ExpirationDate - today <= new TimeSpan(2, 0, 0, 0)).OrderBy(i => i.ExpirationDate);
+            }            
+            FridgeItems.AddRange(expiredItems);
             IsBusy = false;
         }
     }
