@@ -8,10 +8,39 @@
     </ContentPage.BindingContext>
 
 
+    <ContentPage.ToolbarItems>
+
+
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <StackLayout>
+        <ListView VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Text" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="10,0"/>
+                            <Label Text="Date" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
+                            <Label Text="Amount" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
     
 </ContentPage>
