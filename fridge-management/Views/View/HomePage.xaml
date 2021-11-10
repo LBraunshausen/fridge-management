@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fridge_management.Views.HomePage"
-             xmlns:vm="clr-namespace:fridge_management.ViewModels">
+             xmlns:vm="clr-namespace:fridge_management.ViewModels"
+             Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
@@ -20,7 +21,8 @@
     </ContentPage.Resources>
 
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand">
+        <Label Text="Ablaufende Produkte" FontAttributes="Bold" FontSize="24"/>
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -33,14 +35,13 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Text="Text" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="10,0"/>
-                            <Label Text="Date" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
-                            <Label Text="Amount" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
+                            <Label Text="{Binding Text}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="10,0"/>
+                            <Label Text="{Binding ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
+                            <Label Text="{Binding Amount, StringFormat='{0:}x'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
 </ContentPage>
