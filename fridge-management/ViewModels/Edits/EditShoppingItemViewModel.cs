@@ -2,66 +2,64 @@
 using fridge_management.Services;
 using MvvmHelpers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace fridge_management.ViewModels
 {
-    [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]
-    class EditFridgeItemViewModel : BindableObject
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    class EditShoppingListItemViewModel : BindableObject
     {
         public string Title { get; set; }
         public Command EditCommand { get; }
-        public FridgeItem FridgeItem { get; set; }
-        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
-        public int FridgeItemId { get; set; }
+        public Item curItem { get; set; }
+        public ObservableRangeCollection<Item> Items { get; set; }
+        public int ItemId { get; set; }
         public string Text
         {
-            get => FridgeItem.Text;
+            get => curItem.Text;
             set
             {
-                if (value == FridgeItem.Text)
+                if (value == curItem.Text)
                     return;
-                FridgeItem.Text = value;
+                curItem.Text = value;
                 OnPropertyChanged();
             }
         }
 
         public DateTime ExpirationDate
         {
-            get => FridgeItem.ExpirationDate;
+            get => curItem.ExpirationDate;
             set
             {
-                if (value == FridgeItem.ExpirationDate)
+                if (value == curItem.ExpirationDate)
                     return;
-                FridgeItem.ExpirationDate = value;
+                curItem.ExpirationDate = value;
                 OnPropertyChanged();
             }
         }
 
         public int Amount
         {
-            get => FridgeItem.Amount;
+            get => curItem.Amount;
             set
             {
-                if (value == FridgeItem.Amount)
+                if (value == curItem.Amount)
                     return;
-                FridgeItem.Amount = value;
+                curItem.Amount = value;
                 OnPropertyChanged();
             }
         }
 
-        public EditFridgeItemViewModel()
+        public EditShoppingListItemViewModel()
         {
             Title = "Inhalt bearbeiten";
             EditCommand = new Command(Edit);
-            FridgeItem = new FridgeItem();
+            curItem = new Item();
         }
 
         public async void Edit()
         {
-            await FridgeItemService.EditFridgeItem(FridgeItem.Text, FridgeItem.ExpirationDate, FridgeItem.Amount);
+            await BaseService<Item>.Edit(curItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }

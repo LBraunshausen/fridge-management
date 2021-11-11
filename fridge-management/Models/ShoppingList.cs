@@ -1,10 +1,8 @@
 ﻿using SQLite;
-using System;
 using System.Collections.Generic;
 
 namespace fridge_management.Models
 {
-
     public class ShoppingList
     {
         [PrimaryKey, AutoIncrement]

@@ -1,15 +1,14 @@
-﻿using SQLite;
+﻿using fridge_management.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
-using fridge_management.Models;
 
 namespace fridge_management.Services
 {
-    public class ShoppingListService
+    public class FridgeItemService
     {
         static SQLiteAsyncConnection db;
         static async Task Init()
@@ -24,17 +23,11 @@ namespace fridge_management.Services
             await db.CreateTableAsync<FridgeItem>();
         }
 
-        public static async Task AddFridgeItem(string text, DateTime expirationDate, int amount)
+        public static async Task AddFridgeItem(FridgeItem fridgeItem)
         {
             await Init();
-            var item = new FridgeItem
-            {
-                Text = text,
-                ExpirationDate = expirationDate,
-                Amount = amount                
-            };
 
-            await db.InsertAsync(item);
+            await db.InsertAsync(fridgeItem);
         }
 
         public static async Task DeleteFridgeItem(int id)
@@ -44,18 +37,11 @@ namespace fridge_management.Services
             await db.DeleteAsync<FridgeItem>(id);
         }
 
-        public static async Task EditFridgeItem(string text, DateTime expirationDate, int amount)
+        public static async Task EditFridgeItem(FridgeItem fridgeItem)
         {
             await Init();
 
-            var item = new FridgeItem
-            {
-                //Id = id,
-                Text = text,
-                ExpirationDate = expirationDate,
-                Amount = amount
-            };
-            await db.UpdateAsync(item);
+            await db.UpdateAsync(fridgeItem);
         }
 
         public static async Task<IEnumerable<FridgeItem>> GetFridgeItems()
