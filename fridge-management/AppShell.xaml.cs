@@ -9,6 +9,7 @@ namespace fridge_management
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(NewFridgeItemPage), typeof(NewFridgeItemPage));
             Routing.RegisterRoute(nameof(FridgeItemsPage), typeof(FridgeItemsPage));
             Routing.RegisterRoute(nameof(EditFridgeItemPage), typeof(EditFridgeItemPage));

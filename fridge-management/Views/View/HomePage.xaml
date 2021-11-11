@@ -1,28 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="fridge_management.Views.FridgeItemsPage"
-             xmlns:vm="clr-namespace:fridge_management.ViewModels"               
+             x:Class="fridge_management.Views.HomePage"
+             xmlns:vm="clr-namespace:fridge_management.ViewModels"
              Title="{Binding Title}">
-    
     <ContentPage.BindingContext>
-        <vm:FridgeItemsViewModel />
+        <vm:HomeViewModel />
     </ContentPage.BindingContext>
-    
+
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Command="{Binding AddCommand}" />
-        <ToolbarItem Text="-" Command="{Binding RemoveCommand}"/>
-        <ToolbarItem Command="{Binding EditCommand}" Icon="edit_icon.png"/>
-        
+
+
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+        <Label Text="Ablaufende Produkte" FontAttributes="Bold" FontSize="24"/>
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
