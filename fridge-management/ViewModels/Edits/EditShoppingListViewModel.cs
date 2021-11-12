@@ -7,12 +7,12 @@ using Xamarin.Forms;
 namespace fridge_management.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    class EditShoppingListItemViewModel : BindableObject
+    class EditShoppingListListViewModel : BindableObject
     {
         public string Title { get; set; }
         public Command EditCommand { get; }
-        public ShoppingListItem curItem { get; set; }
-        public ObservableRangeCollection<ShoppingListItem> Items { get; set; }
+        public ShoppingList curItem { get; set; }
+        public ObservableRangeCollection<ShoppingList> Items { get; set; }
         public int ItemId { get; set; }
         public string Text
         {
@@ -26,40 +26,17 @@ namespace fridge_management.ViewModels
             }
         }
 
-        public DateTime ExpirationDate
-        {
-            get => curItem.ExpirationDate;
-            set
-            {
-                if (value == curItem.ExpirationDate)
-                    return;
-                curItem.ExpirationDate = value;
-                OnPropertyChanged();
-            }
-        }
 
-        public int Amount
-        {
-            get => curItem.Amount;
-            set
-            {
-                if (value == curItem.Amount)
-                    return;
-                curItem.Amount = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public EditShoppingListItemViewModel()
+        public EditShoppingListListViewModel()
         {
             Title = "Inhalt bearbeiten";
             EditCommand = new Command(Edit);
-            curItem = new ShoppingListItem();
+            curItem = new ShoppingList();
         }
 
         public async void Edit()
         {
-            await BaseService<ShoppingListItem>.Edit(curItem);
+            await BaseService<ShoppingList>.Edit(curItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
