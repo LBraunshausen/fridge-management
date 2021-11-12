@@ -3,13 +3,11 @@ using Xamarin.Forms;
 
 namespace fridge_management.Views
 {
-
-    public partial class EditShoppingListPage : ContentPage
+    public partial class NewShoppingListListPage : ContentPage
     {
-        public EditShoppingListPage()
+        public NewShoppingListListPage()
         {
             InitializeComponent();
         }
-
     }
 }
