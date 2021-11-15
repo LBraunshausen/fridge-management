@@ -3,6 +3,9 @@ using System;
 
 namespace fridge_management.Models
 {
+    /// <summary>
+    ///     Model which contains a FridgeItem
+    /// </summary>
     public class FridgeItem : IModel
     {
         [PrimaryKey, AutoIncrement]
