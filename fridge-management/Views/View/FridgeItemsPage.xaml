@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Command="{Binding AddCommand}" />
+        <ToolbarItem Text="+" Command="{Binding OpenAddPageCommand}" />
         <ToolbarItem Text="-" Command="{Binding RemoveCommand}"/>
         <ToolbarItem Command="{Binding EditCommand}" Icon="edit_icon.png"/>
         
