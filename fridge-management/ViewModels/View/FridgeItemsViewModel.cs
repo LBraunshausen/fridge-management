@@ -9,7 +9,10 @@ using Xamarin.Forms;
 
 namespace fridge_management.ViewModels
 {
-    [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]
+    /// <summary>
+    ///     ViewModel which manages the connection between FridgeItemsPage, NewFridgeItemPage, EditFridgeItemPage
+    /// </summary>
+    [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]            
     public class FridgeItemsViewModel : BaseViewModel
     {
         public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
@@ -80,7 +83,9 @@ namespace fridge_management.ViewModels
             }
         }
 
-
+        /// <summary>
+        ///     The Constructor instantiates all commands, sets default values for the FridgeItem-properties and loads all FridgeItems
+        /// </summary>
         public FridgeItemsViewModel()
         {
             Title = "Kühlschrankinhalt";
@@ -103,10 +108,17 @@ namespace fridge_management.ViewModels
               );
         }
 
+        /// <summary>
+        ///     The OpenAddPage method opens a NewFridgeItemPage.
+        /// </summary>
         private async void OpenAddPage()
         {
             await Shell.Current.GoToAsync(nameof(NewFridgeItemPage));
         }
+
+        /// <summary>
+        ///     The Add method is called by a command from NewFridgeItemPage and adds a new FridgeItem.
+        /// </summary>
         private async void Add()
         {
             await BaseService<FridgeItem>.Add(selectedItem);
@@ -115,12 +127,18 @@ namespace fridge_management.ViewModels
             
         }
 
+        /// <summary>
+        ///     The Remove method is called by FridgeItemsPage to delete a selected item.
+        /// </summary>
         private async void Remove()
         {
             await BaseService<FridgeItem>.Delete(selectedItem.Id);
             Load();
-        }        
+        }
 
+        /// <summary>
+        ///     The OpenEditPage method opens a new EditFridgeItemPage if an item is selected.
+        /// </summary>
         private async void OpenEditPage()
         {
             if (SelectedItem == null)
@@ -135,6 +153,9 @@ namespace fridge_management.ViewModels
             SelectedItem = fridgeItem;
         }
 
+        /// <summary>
+        ///     The Edit method edits an existing FridgeItem
+        /// </summary>
         private async void Edit()
         {
             await BaseService<FridgeItem>.Edit(selectedItem);
@@ -142,7 +163,9 @@ namespace fridge_management.ViewModels
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 
-
+        /// <summary>
+        ///     The Load method loads all FridgeItems and adds them to the view
+        /// </summary>
         private async void Load()
         {
             IsBusy = true;
