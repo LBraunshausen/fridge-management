@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fridge-management.iOS", "fr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fridge-management", "fridge-management\fridge-management.csproj", "{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fridge_management_Tests", "fridge_management_Tests\fridge_management_Tests.csproj", "{B86FFDFB-5007-439B-9ECF-175EBCA68668}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,18 +73,6 @@ Global
 		{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Release|iPhone.Build.0 = Release|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{B86FFDFB-5007-439B-9ECF-175EBCA68668}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
