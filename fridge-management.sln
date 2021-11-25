@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fridge-management.iOS", "fr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fridge-management", "fridge-management\fridge-management.csproj", "{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fridge_management_Test", "fridge_management_Test\fridge_management_Test.csproj", "{A2BB8539-14D0-4651-A184-0036F2CAE375}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6F9EA189-204C-4F01-B86A-5DEAC86D2A6D} = {6F9EA189-204C-4F01-B86A-5DEAC86D2A6D}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +78,18 @@ Global
 		{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{80C47B7E-82CE-4DD5-94E2-AECB988D5ACB}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Release|iPhone.Build.0 = Release|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{A2BB8539-14D0-4651-A184-0036F2CAE375}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
