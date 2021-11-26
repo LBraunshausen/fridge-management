@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
 
 namespace fridge_management.Models
@@ -6,7 +7,7 @@ namespace fridge_management.Models
     public class ShoppingList :  IModel
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Text { get; set; }
     }
 }

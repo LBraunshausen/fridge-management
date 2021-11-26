@@ -14,8 +14,8 @@ namespace fridge_management.ViewModels
         public string Title { get; set; }
         public Command EditCommand { get; }
         private FridgeItem curItem;        
-        int fridgeItemId;
-        public int FridgeItemId {
+        Guid fridgeItemId;
+        public Guid FridgeItemId {
             get => fridgeItemId;
             set {
                 SetProperty(ref fridgeItemId, value);
