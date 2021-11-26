@@ -97,5 +97,34 @@ namespace fridge_management_Test
                 Assert.IsTrue(fridgeItems.Count == 0);
             });
         }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            FridgeItem item = new FridgeItem()
+            {
+                Id = new Guid(),
+                Text = "Testprodukt",
+                Amount = 1,
+                ExpirationDate = DateTime.Now
+            };
+
+            Task.Run(async () =>
+            {
+                await BaseService<FridgeItem>.Add(item);
+
+                await BaseService<FridgeItem>.Delete(item.Id);
+
+                var item1 = await BaseService<FridgeItem>.GetById(item.Id);
+
+                Assert.AreEqual(1, 1);
+            });
+
+
+
+        }
     }
+
+
+    
 }
