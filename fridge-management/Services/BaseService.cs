@@ -1,5 +1,6 @@
 ﻿using fridge_management.Models;
 using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -25,8 +26,19 @@ namespace fridge_management.Services
             if (db != null)
                 return;
 
-            // Get an absolute path to the database file
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Fridge.db");
+            // Get an absolute path to the database file            
+            var databasePath = "";
+            if (DeviceInfo.Platform != DevicePlatform.Unknown)
+            {
+                databasePath = Path.Combine(FileSystem.AppDataDirectory, "Fridge.db");
+            }
+            else
+            {
+                databasePath = Path.Combine("Fridge.db");
+            }
+
+
+            //var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Fridge.db");
 
             // create database connection
             db = new SQLiteAsyncConnection(databasePath);
@@ -53,7 +65,7 @@ namespace fridge_management.Services
         /// </summary>
         /// <param name="id">contains the id of one specific row which has to be deleted</param>
         /// <returns></returns>
-        public static async Task Delete(int id)
+        public static async Task Delete(Guid id)
         {
             // initialize the table
             await Init();
@@ -94,7 +106,7 @@ namespace fridge_management.Services
         /// </summary>
         /// <param name="id">contains a specific id to find the specific table item</param>
         /// <returns>an specific item of the desired table</returns>
-        public static async Task<T> GetById(int id)
+        public static async Task<T> GetById(Guid id)
         {
             // initialize the table
             Init();

@@ -4,6 +4,7 @@ using fridge_management.Services;
 using fridge_management.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace fridge_management_Test
 {
@@ -15,17 +16,25 @@ namespace fridge_management_Test
         {
             FridgeItem item = new FridgeItem()
             {
+                Id = new Guid(),
                 Text = "Testprodukt",
                 Amount = 1,
                 ExpirationDate = DateTime.Now
             };
 
-            BaseService<FridgeItem>.Add(item);
+            
 
-            BaseService<FridgeItem>.GetById(item.Id);
+            var test = new FridgeItem();
 
-            Assert.AreEqual(1, 1);
+            Task.Run(async () =>
+            {
+                await BaseService<FridgeItem>.Add(item);
+                test = await BaseService<FridgeItem>.GetById(item.Id);
+                Assert.AreEqual(test, item.Id);
+            });
 
+            Console.WriteLine("");
+            
         }
     }
 }
