@@ -52,7 +52,7 @@ namespace fridge_management.Services
             return item;
         }
 
-        public static async Task<IEnumerable<FridgeItem>> GetFridgeItem(int id)
+        public static async Task<IEnumerable<FridgeItem>> GetFridgeItem(Guid id)
         {
             Init();
 
