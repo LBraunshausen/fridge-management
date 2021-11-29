@@ -5,6 +5,7 @@ using fridge_management.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using System.Collections;
 
 namespace fridge_management_Test
 {
@@ -14,27 +15,26 @@ namespace fridge_management_Test
         [TestMethod]
         public void TestAdd()
         {
-            FridgeItem item = new FridgeItem()
+            FridgeItem addItem = new FridgeItem()
             {
                 Id = new Guid(),
                 Text = "Testprodukt",
                 Amount = 1,
                 ExpirationDate = DateTime.Now
             };
-
             
-
-            var test = new FridgeItem();
-
-            Task.Run(async () =>
+            Task task = Task.Run(async () =>
             {
-                await BaseService<FridgeItem>.Add(item);
-                test = await BaseService<FridgeItem>.GetById(item.Id);
-                Assert.AreEqual(test, item.Id);
-            });
+                await BaseService<FridgeItem>.Add(addItem);
+                FridgeItem fridgeItem = null;
 
-            Console.WriteLine("");
-            
+                foreach (FridgeItem item in await BaseService<FridgeItem>.GetById(addItem.Id))
+                {
+                    fridgeItem = item;
+                } 
+                Assert.AreEqual(addItem.Id, fridgeItem.Id, "not equal");
+            });
+            task.Wait();                        
         }
     }
 }
