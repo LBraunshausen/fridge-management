@@ -46,6 +46,18 @@ namespace fridge_management.Services
             await db.CreateTableAsync<T>();
         }
 
+
+        /// <summary>
+        ///     The DropTable method drops a table of type T
+        /// </summary>
+        /// <returns></returns>
+        public static async Task DropTable()
+        {
+            await Init();
+
+            await db.DropTableAsync<T>();
+        }
+
         /// <summary>
         ///     The Add method adds new items to a database table
         /// </summary>
@@ -71,6 +83,13 @@ namespace fridge_management.Services
             await Init();
 
             await db.DeleteAsync<T>(id);
+        }
+
+        public static async Task DeleteAll()
+        {
+            await Init();
+
+            await db.DeleteAllAsync<T>();
         }
 
         /// <summary>
@@ -106,14 +125,15 @@ namespace fridge_management.Services
         /// </summary>
         /// <param name="id">contains a specific id to find the specific table item</param>
         /// <returns>an specific item of the desired table</returns>
-        public static async Task<T> GetById(Guid id)
+        public static async Task<IEnumerable<T>> GetById(Guid id)
         {
             // initialize the table
             Init();
 
             // query the table for specific item
-            var item = await db.QueryAsync<T>($"select * from {typeof(T).Name} where Id == {id}");
-            return item[0];
+            //var item = await db.QueryAsync<T>($"select * from {typeof(T).Name} where Id == {id}");
+            var item = await db.Table<T>().Where(v => v.Id == id).ToListAsync();
+            return item;
         }
     }
 }
