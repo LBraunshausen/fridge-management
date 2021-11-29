@@ -126,7 +126,7 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The Remove method is called by FridgeItemsPage to delete a selected item.
+        ///     The Remove method is called by ShoppingListPage to delete a selected item.
         /// </summary>
         private async void Remove()
         {
