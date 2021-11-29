@@ -28,13 +28,61 @@ namespace fridge_management_Test
                 await BaseService<FridgeItem>.Add(addItem);
                 FridgeItem fridgeItem = null;
 
-                foreach (FridgeItem item in await BaseService<FridgeItem>.GetById(addItem.Id))
-                {
-                    fridgeItem = item;
-                } 
+                fridgeItem = await BaseService<FridgeItem>.GetById(addItem.Id);
+
                 Assert.AreEqual(addItem.Id, fridgeItem.Id, "not equal");
             });
             task.Wait();                        
+        }
+
+        [TestMethod]
+        public void TestGetItems()
+        {
+            FridgeItem addItem = new FridgeItem()
+            {
+                Id = new Guid(),
+                Text = "Testprodukt",
+                Amount = 1,
+                ExpirationDate = DateTime.Now
+            };
+
+            Task task = Task.Run(async () =>
+            {
+                await BaseService<FridgeItem>.Add(addItem);
+                FridgeItem fridgeItem = null;
+
+                var fridgeItems = (ICollection)await BaseService<FridgeItem>.GetItems();
+
+                Assert.IsTrue(fridgeItems.Count > 0); 
+            });
+            task.Wait();
+        }
+
+        [TestMethod]
+        public void TestEdit()
+        {
+            FridgeItem addItem = new FridgeItem()
+            {
+                Id = new Guid(),
+                Text = "Testprodukt",
+                Amount = 1,
+                ExpirationDate = DateTime.Now
+            };
+
+            Task task = Task.Run(async () =>
+            {
+                await BaseService<FridgeItem>.Add(addItem);
+                FridgeItem fridgeItem = null;
+
+
+                addItem.Text = "Testprodukt2";
+                await BaseService<FridgeItem>.Edit(addItem);
+
+                fridgeItem = await BaseService<FridgeItem>.GetById(addItem.Id);
+
+                Assert.AreEqual(addItem.Text, fridgeItem.Text, "not equal");                
+            });
+            task.Wait();
         }
     }
 }
