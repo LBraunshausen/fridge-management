@@ -4,6 +4,7 @@ using fridge_management.Views;
 using MvvmHelpers;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 
@@ -22,8 +23,8 @@ namespace fridge_management.ViewModels
         public Command OpenEditPageCommand { get; }
         public Command EditCommand { get; }
 
-        int fridgeItemId;
-        public int FridgeItemId
+        string fridgeItemId;
+        public string FridgeItemId
         {
             get => fridgeItemId;
             set
@@ -97,7 +98,7 @@ namespace fridge_management.ViewModels
             FridgeItems = new ObservableRangeCollection<FridgeItem>();
             selectedItem = new FridgeItem();
             ExpirationDate = DateTime.Now;
-            Amount = 1;
+            Amount = 1;            
             Load();
 
             MessagingCenter.Subscribe<object, string>("MyApp", "Update",
@@ -121,6 +122,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Add()
         {
+            selectedItem.Id = new Guid();
             await BaseService<FridgeItem>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
@@ -149,8 +151,12 @@ namespace fridge_management.ViewModels
 
         private async void GetItem()
         {
-            var fridgeItem = await BaseService<FridgeItem>.GetById(FridgeItemId);
-            SelectedItem = fridgeItem;
+            var fridgeItem = await BaseService<FridgeItem>.GetById(Guid.Parse(FridgeItemId));
+            foreach (FridgeItem item in fridgeItem)
+            {
+                SelectedItem = item;
+            }
+            
         }
 
         /// <summary>
