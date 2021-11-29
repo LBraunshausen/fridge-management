@@ -8,16 +8,17 @@ using Xamarin.Forms;
 
 namespace fridge_management.ViewModels
 {
-    public class ShoppingListViewModel : BaseViewModel
+    public class ShoppingListListViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<ShoppingListItem> Items { get; set; }
+        public ObservableRangeCollection<ShoppingList> Items { get; set; }
         public Command AddCommand { get; }
+        public Command DoubleClickCommand { get; }
         public Command RemoveCommand { get; }
         public Command EditCommand { get; }
 
 
-        private ShoppingListItem selectedItem;
-        public ShoppingListItem SelectedItem
+        private ShoppingList selectedItem;
+        public ShoppingList SelectedItem
         {
             get => selectedItem;
             set
@@ -29,13 +30,14 @@ namespace fridge_management.ViewModels
             }
         }
 
-        public ShoppingListViewModel()
+        public ShoppingListListViewModel()
         {
-            Title = "Einkaufslistenitems";
+            Title = "Einkaufsliste";
             AddCommand = new Command(Add);
+            DoubleClickCommand = new Command(DoubleClick);
             RemoveCommand = new Command(Remove);
             EditCommand = new Command(Edit);
-            Items = new ObservableRangeCollection<ShoppingListItem>();
+            Items = new ObservableRangeCollection<ShoppingList>();
             Load();
 
             MessagingCenter.Subscribe<object, string>("MyApp", "Update",
@@ -48,12 +50,17 @@ namespace fridge_management.ViewModels
 
         private async void Add()
         {
-            await Shell.Current.GoToAsync(nameof(NewShoppingListItemPage));
+            await Shell.Current.GoToAsync(nameof(NewShoppingListListPage));
+        }
+
+        private async void DoubleClick()
+        {
+            await Shell.Current.GoToAsync(nameof(ShoppingListPage));
         }
 
         private async void Remove()
         {
-            await BaseService<ShoppingListItem>.Delete(selectedItem.Id);
+            await BaseService<ShoppingList>.Delete(selectedItem.Id);
             Load();
         }
 
@@ -68,7 +75,7 @@ namespace fridge_management.ViewModels
         {
             IsBusy = true;
             Items.Clear();
-            var items = await BaseService<ShoppingListItem>.GetItems();
+            var items = await BaseService<ShoppingList>.GetItems();
             Items.AddRange(items);
             IsBusy = false;
         }
