@@ -84,5 +84,18 @@ namespace fridge_management_Test
             });
             task.Wait();
         }
+
+        [TestMethod]
+        public void TestDeleteAll()
+        {
+            Task task = Task.Run(async () =>
+            {
+                await BaseService<FridgeItem>.DeleteAll();
+
+                var fridgeItems = (ICollection)await BaseService<FridgeItem>.GetItems();
+
+                Assert.IsTrue(fridgeItems.Count == 0);
+            });
+        }
     }
 }
