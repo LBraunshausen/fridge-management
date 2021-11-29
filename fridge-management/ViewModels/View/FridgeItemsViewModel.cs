@@ -152,11 +152,8 @@ namespace fridge_management.ViewModels
         private async void GetItem()
         {
             var fridgeItem = await BaseService<FridgeItem>.GetById(Guid.Parse(FridgeItemId));
-            foreach (FridgeItem item in fridgeItem)
-            {
-                SelectedItem = item;
-            }
-            
+
+            SelectedItem = fridgeItem;            
         }
 
         /// <summary>
