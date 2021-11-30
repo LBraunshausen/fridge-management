@@ -23,8 +23,8 @@ namespace fridge_management.ViewModels
         public Command OpenEditPageCommand { get; }
         public Command EditCommand { get; }
 
-        Guid fridgeItemId;
-        public Guid FridgeItemId
+        int fridgeItemId;
+        public int FridgeItemId
         {
             get => fridgeItemId;
             set
