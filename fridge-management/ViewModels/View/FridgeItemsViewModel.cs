@@ -6,7 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-
+using ZXing;
 
 namespace fridge_management.ViewModels
 {
@@ -18,18 +18,65 @@ namespace fridge_management.ViewModels
     {
         public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
         public Command OpenAddPageCommand { get; }
-        public Command AddCommand { get; }
+        public Command OpenScannerPageCommand { get; }
+
+        private Result code;
+        public Result Code 
+        {
+            get => code;
+            set
+            {
+                if (value == code)
+                    return;
+                code = value;
+                OnPropertyChanged();
+            }
+        }
+
+        
+        private bool isScanning;
+        public bool IsScanning
+        {
+            get => isScanning;
+            set
+            {
+                if (value == isScanning)
+                    return;
+                isScanning = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Command ScanResultCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        IsScanning = false;
+                        var result = HttpRequestService.getItemByEan(Code.Text);
+                        Text = result["products"][0]["title"].ToString();
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                        IsScanning = true;
+                    });
+                });
+            }
+        }
+
+        public Command AddCommand { get; }        
         public Command RemoveCommand { get; }
         public Command OpenEditPageCommand { get; }
         public Command EditCommand { get; }
 
-        Guid fridgeItemId;
+        string fridgeItemId;
         public Guid FridgeItemId
         {
-            get => fridgeItemId;
+            get => Guid.Parse(fridgeItemId);
             set
             {
-                SetProperty(ref fridgeItemId, value);                
+                SetProperty(ref fridgeItemId, value.ToString());
                 GetItem();
             }
         }
@@ -91,15 +138,18 @@ namespace fridge_management.ViewModels
         {
             Title = "Kühlschrankinhalt";
             OpenAddPageCommand = new Command(OpenAddPage);
-            AddCommand = new Command(Add);
+            OpenScannerPageCommand = new Command(OpenScannerPage);
+            AddCommand = new Command(Add);            
             RemoveCommand = new Command(Remove);
             OpenEditPageCommand = new Command(OpenEditPage);
             EditCommand = new Command(Edit);
             FridgeItems = new ObservableRangeCollection<FridgeItem>();
             selectedItem = new FridgeItem();
             ExpirationDate = DateTime.Now;
-            Amount = 1;            
-            Load();
+            Amount = 1;
+            isScanning = true;
+
+            Load();                        
 
             MessagingCenter.Subscribe<object, string>("MyApp", "Update",
               (sender, arg) =>
@@ -114,7 +164,17 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void OpenAddPage()
         {
-            await Shell.Current.GoToAsync(nameof(NewFridgeItemPage));
+            Title = "Produkt hinzufügen";
+            await Shell.Current.GoToAsync(nameof(NewFridgeItemPage));            
+        }
+
+        /// <summary>
+        ///     The OpenScannerPage method opens a BarcodeScannerPage
+        /// </summary>
+        private async void OpenScannerPage()
+        {
+            Title = "Code einscannen";
+            await Shell.Current.GoToAsync(nameof(BarcodeScannerPage));            
         }
 
         /// <summary>
@@ -128,7 +188,7 @@ namespace fridge_management.ViewModels
             await Application.Current.MainPage.Navigation.PopAsync();
             
         }
-
+        
         /// <summary>
         ///     The Remove method is called by FridgeItemsPage to delete a selected item.
         /// </summary>
@@ -144,14 +204,14 @@ namespace fridge_management.ViewModels
         private async void OpenEditPage()
         {
             if (SelectedItem == null)
-                return;           
+                return;
             
             await Shell.Current.GoToAsync($"{nameof(EditFridgeItemPage)}?FridgeItemId={selectedItem.Id}");
         }
 
         private async void GetItem()
         {
-            var fridgeItem = await BaseService<FridgeItem>.GetById(Guid.Parse(FridgeItemId));
+            var fridgeItem = await BaseService<FridgeItem>.GetById(FridgeItemId);
 
             SelectedItem = fridgeItem;            
         }
