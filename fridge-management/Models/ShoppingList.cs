@@ -18,5 +18,9 @@ namespace fridge_management.Models
         /// Contains the name of the shopping list
         /// </summary>
         public string Text { get; set; }
+        /// <summary>
+        /// Contains the number of the shopping list
+        /// </summary>
+        public int ShoppingListId { get; set; }
     }
 }
