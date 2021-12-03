@@ -9,11 +9,16 @@
         <vm:FridgeItemsViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="*" Command="{Binding OpenScannerPageCommand}" Icon="scan_icon.png"/>
+
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         
         <StackLayout Orientation="Vertical">
             <Label Text="Produktname:" Margin="10,5,0,0"/>
-            <Entry Text="{Binding SelectedItem.Text}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
+            <Entry Text="{Binding SelectedItem.Text, Mode=TwoWay}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
