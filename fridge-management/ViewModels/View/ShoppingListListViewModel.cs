@@ -30,6 +30,8 @@ namespace fridge_management.ViewModels
             }
         }
 
+        public int ShoppingListId { get; set; }
+
         public ShoppingListListViewModel()
         {
             Title = "Einkaufsliste";
@@ -55,7 +57,8 @@ namespace fridge_management.ViewModels
 
         private async void DoubleClick()
         {
-            await Shell.Current.GoToAsync(nameof(ShoppingListPage));
+            //await Shell.Current.GoToAsync(nameof(ShoppingListPage));
+            await Shell.Current.GoToAsync($"{nameof(ShoppingListPage)}?ShoppingListId={selectedItem.ShoppingListId}");
         }
 
         private async void Remove()
@@ -68,7 +71,7 @@ namespace fridge_management.ViewModels
         {
             if (SelectedItem == null)
                 return;
-            //await Shell.Current.GoToAsync($"{nameof(EditShoppingListItemPage)}?ItemId={selectedItem.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListListViewModel)}?ItemId={selectedItem.Id}");
         }
 
         public async Task Load()

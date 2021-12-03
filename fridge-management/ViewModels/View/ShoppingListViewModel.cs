@@ -2,18 +2,34 @@
 using fridge_management.Services;
 using fridge_management.Views;
 using MvvmHelpers;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
 namespace fridge_management.ViewModels
 {
+    [QueryProperty(nameof(ShoppingListId), nameof(ShoppingListId))]
     public class ShoppingListViewModel : BaseViewModel
     {
         public ObservableRangeCollection<ShoppingListItem> Items { get; set; }
         public Command AddCommand { get; }
         public Command RemoveCommand { get; }
         public Command EditCommand { get; }
+
+        private int shoppingListId;
+        public int ShoppingListId
+        {
+            get => shoppingListId;
+            set
+            {
+                if (value == shoppingListId)
+                    return;
+                shoppingListId = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         private ShoppingListItem selectedItem;
@@ -68,8 +84,10 @@ namespace fridge_management.ViewModels
         {
             IsBusy = true;
             Items.Clear();
+            IEnumerable<ShoppingListItem> selectedItems = null;   
             var items = await BaseService<ShoppingListItem>.GetItems();
-            Items.AddRange(items);
+            selectedItems = items.Where(i => i.ShoppingListId == ShoppingListId);
+            Items.AddRange(selectedItems);
             IsBusy = false;
         }
     }
