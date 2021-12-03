@@ -6,7 +6,7 @@
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
-        <vm:ShoppingListViewModel />
+        <vm:ShoppingListListViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
