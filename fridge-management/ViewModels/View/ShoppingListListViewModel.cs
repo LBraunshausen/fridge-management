@@ -22,8 +22,8 @@ namespace fridge_management.ViewModels
         public Command OpenEditPageCommand { get; }
         public Command EditCommand { get; }
 
-        Guid shoppingListId;
-        public Guid ShoppingListId
+        int shoppingListId;
+        public int ShoppingListId
         {
             get => shoppingListId;
             set
@@ -46,8 +46,6 @@ namespace fridge_management.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public int ShoppingListId { get; set; }
 
 
         public ShoppingListListViewModel()
