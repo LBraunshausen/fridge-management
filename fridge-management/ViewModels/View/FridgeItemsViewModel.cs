@@ -72,7 +72,9 @@ namespace fridge_management.ViewModels
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
+                        // deactivate scanning
                         IsScanning = false;
+                        // retrieve product info from ean code
                         var result = HttpRequestService.getItemByEan(Code.Text);
                         Text = result["products"][0]["title"].ToString();
                         await Application.Current.MainPage.Navigation.PopAsync();
@@ -221,8 +223,11 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Add()
         {
+            // generate new guid
             selectedItem.Id = new Guid();
+            // add item to database
             await BaseService<FridgeItem>.Add(selectedItem);
+            // update listview
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
             
@@ -274,7 +279,9 @@ namespace fridge_management.ViewModels
         private async void Load()
         {
             IsBusy = true;
+            // clear listview
             FridgeItems.Clear();
+            // get list of all FridgeItems
             var fridgeItems = await BaseService<FridgeItem>.GetItems();
             FridgeItems.AddRange(fridgeItems);
             IsBusy = false;

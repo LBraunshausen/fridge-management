@@ -1,15 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Page which is used to scan ean codes -->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fridge_management.Views.BarcodeScannerPage"
              xmlns:vm="clr-namespace:fridge_management.ViewModels"   
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              Title="{Binding Title}">
+    <!--Connect FridgeItemsViewModel with this page-->
     <ContentPage.BindingContext>
         <vm:FridgeItemsViewModel />
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
+        <!--Define ZXing barcode scanner-->
         <StackLayout>
             <zxing:ZXingScannerView IsScanning="{Binding IsScanning, Mode=TwoWay}" ScanResultCommand="{Binding ScanResultCommand}" Result="{Binding Code, Mode=TwoWay}" /> 
         </StackLayout>
