@@ -10,12 +10,17 @@ namespace fridge_management.Services
 {
     public class HttpRequestService
     {
-        
+        /// <summary>
+        /// Static method which calls the ean code api.
+        /// </summary>
+        /// <param name="ean">contains string which contains the ean code</param>
+        /// <returns>JObject which contains the product info of the given ean</returns>
         public static JObject getItemByEan(string ean)
         {
             string url = "https://api.barcodelookup.com/v3/products";
             string key = "646red6gh2dtletavgcn981205sywe";
-            
+         
+            // create http connection
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(url);
 
@@ -33,8 +38,7 @@ namespace fridge_management.Services
             {
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
                 return null;
-            }
-            
+            }            
         }
     }
 }
