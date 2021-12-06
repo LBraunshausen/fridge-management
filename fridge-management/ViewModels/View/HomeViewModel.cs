@@ -19,20 +19,7 @@ namespace fridge_management.ViewModels
         /// <summary>
         /// Contains a list of FridgeItems
         /// </summary>
-        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
-        
-        private FridgeItem selectedItem;
-        public FridgeItem SelectedItem
-        {
-            get => selectedItem;
-            set
-            {
-                if (value == selectedItem)
-                    return;
-                selectedItem = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }        
 
         /// <summary>
         /// Instantiates FridgeItems and loads the data
