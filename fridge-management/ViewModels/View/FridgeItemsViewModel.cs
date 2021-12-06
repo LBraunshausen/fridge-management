@@ -16,10 +16,22 @@ namespace fridge_management.ViewModels
     [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]            
     public class FridgeItemsViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Contains a list of FridgeItems which are listed in the listview
+        /// </summary>
         public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
+        /// <summary>
+        /// Command which manages the opening of an AddPage
+        /// </summary>
         public Command OpenAddPageCommand { get; }
+        /// <summary>
+        /// Command which manages the opening of a ScannerPage
+        /// </summary>
         public Command OpenScannerPageCommand { get; }
 
+        /// <summary>
+        /// Contains the code which is returned by the barcode scanner
+        /// </summary>
         private Result code;
         public Result Code 
         {
@@ -33,7 +45,9 @@ namespace fridge_management.ViewModels
             }
         }
 
-        
+        /// <summary>
+        /// This property is used to activate/inactivate the scanning of the barcode scanner
+        /// </summary>        
         private bool isScanning;
         public bool IsScanning
         {
@@ -47,6 +61,9 @@ namespace fridge_management.ViewModels
             }
         }
 
+        /// <summary>
+        /// Command which manages the scanning an retrieving of the ean code
+        /// </summary>
         public Command ScanResultCommand
         {
             get
@@ -65,11 +82,26 @@ namespace fridge_management.ViewModels
             }
         }
 
-        public Command AddCommand { get; }        
+        /// <summary>
+        /// Command which manages the adding of a FridgeItem
+        /// </summary>
+        public Command AddCommand { get; }
+        /// <summary>
+        /// Command which manages the removing of a FridgeItem
+        /// </summary>
         public Command RemoveCommand { get; }
+        /// <summary>
+        /// Command which manages the opening of a EditPage
+        /// </summary>
         public Command OpenEditPageCommand { get; }
+        /// <summary>
+        /// Command which manages the editing of a FridgeItem
+        /// </summary>
         public Command EditCommand { get; }
 
+        /// <summary>
+        /// Contains the FridgeItemId which is passed by Queryproperties
+        /// </summary>
         string fridgeItemId;
         public Guid FridgeItemId
         {
@@ -81,6 +113,9 @@ namespace fridge_management.ViewModels
             }
         }
 
+        /// <summary>
+        /// Contains the current selected FridgeItem
+        /// </summary>
         private FridgeItem selectedItem;
         public FridgeItem SelectedItem
         {
@@ -132,19 +167,23 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The Constructor instantiates all commands, sets default values for the FridgeItem-properties and loads all FridgeItems
+        /// The Constructor instantiates all commands, sets default values for the FridgeItem-properties and loads all FridgeItems
         /// </summary>
         public FridgeItemsViewModel()
         {
             Title = "Kühlschrankinhalt";
+            // instantiate commands
             OpenAddPageCommand = new Command(OpenAddPage);
             OpenScannerPageCommand = new Command(OpenScannerPage);
             AddCommand = new Command(Add);            
             RemoveCommand = new Command(Remove);
             OpenEditPageCommand = new Command(OpenEditPage);
             EditCommand = new Command(Edit);
+
             FridgeItems = new ObservableRangeCollection<FridgeItem>();
             selectedItem = new FridgeItem();
+            
+            // set default values
             ExpirationDate = DateTime.Now;
             Amount = 1;
             isScanning = true;
@@ -160,7 +199,7 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The OpenAddPage method opens a NewFridgeItemPage.
+        /// The OpenAddPage method opens a NewFridgeItemPage.
         /// </summary>
         private async void OpenAddPage()
         {
@@ -169,7 +208,7 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The OpenScannerPage method opens a BarcodeScannerPage
+        /// The OpenScannerPage method opens a BarcodeScannerPage
         /// </summary>
         private async void OpenScannerPage()
         {
@@ -178,7 +217,7 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The Add method is called by a command from NewFridgeItemPage and adds a new FridgeItem.
+        /// The Add method is called by a command from NewFridgeItemPage and adds a new FridgeItem.
         /// </summary>
         private async void Add()
         {
@@ -190,7 +229,7 @@ namespace fridge_management.ViewModels
         }
         
         /// <summary>
-        ///     The Remove method is called by FridgeItemsPage to delete a selected item.
+        /// The Remove method is called by FridgeItemsPage to delete a selected item.
         /// </summary>
         private async void Remove()
         {
@@ -199,7 +238,7 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The OpenEditPage method opens a new EditFridgeItemPage if an item is selected.
+        /// The OpenEditPage method opens a new EditFridgeItemPage if an item is selected.
         /// </summary>
         private async void OpenEditPage()
         {
@@ -209,6 +248,9 @@ namespace fridge_management.ViewModels
             await Shell.Current.GoToAsync($"{nameof(EditFridgeItemPage)}?FridgeItemId={selectedItem.Id}");
         }
 
+        /// <summary>
+        /// Method which gets a single Item by a given ID
+        /// </summary>
         private async void GetItem()
         {
             var fridgeItem = await BaseService<FridgeItem>.GetById(FridgeItemId);
@@ -217,7 +259,7 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The Edit method edits an existing FridgeItem
+        /// The Edit method edits an existing FridgeItem
         /// </summary>
         private async void Edit()
         {
@@ -227,7 +269,7 @@ namespace fridge_management.ViewModels
         }
 
         /// <summary>
-        ///     The Load method loads all FridgeItems and adds them to the view
+        /// The Load method loads all FridgeItems and adds them to the view
         /// </summary>
         private async void Load()
         {

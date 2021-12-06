@@ -8,6 +8,9 @@ using Newtonsoft.Json.Linq;
 
 namespace fridge_management.Services
 {
+    /// <summary>
+    /// HttpRequestService contains methods for http api requests
+    /// </summary>
     public class HttpRequestService
     {
         /// <summary>
