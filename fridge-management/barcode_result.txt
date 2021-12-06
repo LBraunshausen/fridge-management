@@ -1,0 +1,42 @@
+{
+    "products": [
+        {
+            "barcode_number": "4006748001404",
+            "barcode_formats": "EAN-13 4006748001404",
+            "mpn": "4006748001404",
+            "model": "4006748001404",
+            "asin": "B003R9K44I",
+            "title": "Mayka Bio Erdnuss-Flips, 75 G",
+            "category": "",
+            "manufacturer": "Mayka",
+            "brand": "MAYKA Bio",
+            "contributors": [],
+            "age_group": "",
+            "ingredients": "",
+            "nutrition_facts": "",
+            "energy_efficiency_class": "",
+            "color": "",
+            "gender": "",
+            "material": "",
+            "pattern": "",
+            "format": "",
+            "multipack": "",
+            "size": "",
+            "length": "",
+            "width": "",
+            "height": "",
+            "weight": "17",
+            "release_date": "",
+            "description": "Unsere Bio-Erdnussflips aus feinstem Mais und köstlicher Erdnussbutter sind ein besonders zarter und knuspriger Knabbergenuss. Der hohe Erdnussanteil gibt den luftig-lockeren Flips ihren einmalig leckeren, typischen Erdnussgeschmack.",
+            "features": [
+                "Besonders zart und Kunsprig",
+                "Hoher Erdnussanteil",
+                "Luftig-lockere Flips"
+            ],
+            "images": [],
+            "last_update": "2021-06-22 07:35:48",
+            "stores": [],
+            "reviews": []
+        }
+    ]
+}

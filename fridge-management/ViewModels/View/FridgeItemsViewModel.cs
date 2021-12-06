@@ -13,7 +13,7 @@ namespace fridge_management.ViewModels
     /// <summary>
     ///     ViewModel which manages the connection between FridgeItemsPage, NewFridgeItemPage, EditFridgeItemPage
     /// </summary>
-    [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]            
+    [QueryProperty(nameof(FridgeItemId), nameof(FridgeItemId))]
     public class FridgeItemsViewModel : BaseViewModel
     {
         public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
@@ -56,9 +56,19 @@ namespace fridge_management.ViewModels
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         IsScanning = false;
-                        var result = HttpRequestService.getItemByEan(Code.Text);
-                        Text = result["products"][0]["title"].ToString();
+                        var result = HttpRequestService.getItemByEan("4006748001404");                        
                         await Application.Current.MainPage.Navigation.PopAsync();
+                        
+                        FridgeItem fitem = new FridgeItem
+                        {
+                            Id = new Guid(),
+                            Text = result["products"][0]["title"].ToString(),                            
+                            ExpirationDate = selectedItem.ExpirationDate,
+                            Amount = selectedItem.Amount
+                        };                        
+
+                        SelectedItem = fitem;                                 
+
                         IsScanning = true;
                     });
                 });
@@ -88,7 +98,7 @@ namespace fridge_management.ViewModels
             set
             {
                 if (value == selectedItem)
-                    return;
+                    return;                
                 selectedItem = value;
                 OnPropertyChanged();
                 
@@ -182,11 +192,9 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Add()
         {
-            selectedItem.Id = new Guid();
             await BaseService<FridgeItem>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
-            
         }
         
         /// <summary>

@@ -23,16 +23,17 @@
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label Text="Menge:" Margin="10,0"/>
-                <Entry Text="{Binding SelectedItem.Amount}" Margin="10,0" Grid.Column="0" Grid.Row="1"/>
-                <!--<Stepper x:Name="AmountStepper" Minimum="0" Increment="1" Grid.Column="1" Grid.Row="1"/>-->
-                <Label Text="Mindesthaltbarkeitsdatum:" Margin="10,0" Grid.Column="1" Grid.Row="0"/>
-                <DatePicker x:Name="DatePicker" Margin="10,5,0,0" Date="{Binding SelectedItem.ExpirationDate}" Format="dd.MM.yyyy" Grid.Column="1" Grid.Row="1"/>
+                <Entry Text="{Binding SelectedItem.Amount, Mode=TwoWay}" Margin="10,0" Grid.Column="0" Grid.Row="1"/>
+                <Stepper Minimum="0" Increment="1" Grid.Column="1" Grid.Row="1" Value="{Binding SelectedItem.Amount, Mode=TwoWay}"/>
+                <Label Text="Mindesthaltbarkeitsdatum:" Margin="10,0" Grid.Column="0" Grid.Row="2"/>
+                <DatePicker x:Name="DatePicker" Margin="10,5,0,0" Date="{Binding SelectedItem.ExpirationDate}" Format="dd.MM.yyyy" Grid.Column="0" Grid.Row="2" />
             </Grid>
             <Button Text="Hinzufügen" Command="{Binding AddCommand}" Margin="10,0"/>
         </StackLayout>
