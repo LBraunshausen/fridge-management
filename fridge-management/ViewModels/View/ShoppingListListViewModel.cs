@@ -18,12 +18,13 @@ namespace fridge_management.ViewModels
         public ObservableRangeCollection<ShoppingList> Items { get; set; }
         public Command OpenAddPageCommand { get; }
         public Command AddCommand { get; }
+        public Command DoubleClickCommand { get; set; }
         public Command RemoveCommand { get; }
         public Command OpenEditPageCommand { get; }
         public Command EditCommand { get; }
 
-        int shoppingListId;
-        public int ShoppingListId
+        string shoppingListId;
+        public string ShoppingListId
         {
             get => shoppingListId;
             set
@@ -54,6 +55,7 @@ namespace fridge_management.ViewModels
             OpenAddPageCommand = new Command(OpenAddPage);
             AddCommand = new Command(Add);
             RemoveCommand = new Command(Remove);
+            DoubleClickCommand = new Command(DoubleClick);
             OpenEditPageCommand = new Command(OpenEditPage);
             EditCommand = new Command(Edit);
             Items = new ObservableRangeCollection<ShoppingList>();
@@ -97,6 +99,11 @@ namespace fridge_management.ViewModels
             Load();
         }
 
+        private async void DoubleClick()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ShoppingListPage)}?ShoppingListId={ShoppingListId}");
+        }
+
         /// <summary>
         ///     The OpenEditPage method opens a new EditShoppingListPage if an item is selected.
         /// </summary>
@@ -105,7 +112,7 @@ namespace fridge_management.ViewModels
             if (SelectedItem == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?FridgeItemId={selectedItem.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListId={selectedItem.Id}");
         }
 
         /// <summary>
@@ -113,7 +120,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var item = await BaseService<ShoppingList>.GetById(ShoppingListId);
+            var item = await BaseService<ShoppingList>.GetById(Guid.Parse(ShoppingListId));
 
             SelectedItem = item;
         }
