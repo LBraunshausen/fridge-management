@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace fridge_management.ViewModels
 {
+    /// <summary>
+    /// ViewModel from which all ViewModels inherit. Implemets the OnPropertyChanged methods.
+    /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();

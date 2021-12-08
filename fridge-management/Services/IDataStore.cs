@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 
 namespace fridge_management.Services
 {
+    /// <summary>
+    /// Describes basic methods, which should be implemented in the BaseViewModel
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IDataStore<T>
     {
         Task<bool> AddItemAsync(T item);

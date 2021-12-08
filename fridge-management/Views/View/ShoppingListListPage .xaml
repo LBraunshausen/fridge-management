@@ -22,10 +22,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"  ItemSelected="{Binding DoubleClickCommand}">
-            <ListView.ItemTemplate>
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemSelected="{Binding DoubleClickCommand}">
+            <ListView.ItemTemplate >
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition />

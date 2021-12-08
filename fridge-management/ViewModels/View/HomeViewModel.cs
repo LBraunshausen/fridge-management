@@ -11,23 +11,19 @@ using Xamarin.Forms;
 
 namespace fridge_management.ViewModels
 {
+    /// <summary>
+    ///     ViewModel which manages the connection of FridgeItem and HomePage
+    /// </summary>
     public class HomeViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }
+        /// <summary>
+        /// Contains a list of FridgeItems
+        /// </summary>
+        public ObservableRangeCollection<FridgeItem> FridgeItems { get; set; }        
 
-        private FridgeItem selectedItem;
-        public FridgeItem SelectedItem
-        {
-            get => selectedItem;
-            set
-            {
-                if (value == selectedItem)
-                    return;
-                selectedItem = value;
-                OnPropertyChanged();
-            }
-        }
-
+        /// <summary>
+        /// Instantiates FridgeItems and loads the data
+        /// </summary>
         public HomeViewModel()
         {
             Title = "Startseite";
@@ -35,20 +31,20 @@ namespace fridge_management.ViewModels
             Load();
         }
 
-
+        /// <summary>
+        /// Loads the expired Fridgeitems and orders them by expiration date
+        /// </summary>
+        /// <returns></returns>
         public async Task Load()
         {
             IsBusy = true;
             FridgeItems.Clear();
+            // get all FridgeItems
             var fridgeItems = await BaseService<FridgeItem>.GetItems();
 
             DateTime today = DateTime.Today;
             IEnumerable<FridgeItem> expiredItems = null;
-
-            foreach (FridgeItem item in fridgeItems)
-            {
-                expiredItems = fridgeItems.Where(i => i.ExpirationDate - today <= new TimeSpan(2, 0, 0, 0)).OrderBy(i => i.ExpirationDate);
-            }            
+            expiredItems = fridgeItems.Where<FridgeItem>(i => i.ExpirationDate - today <= new TimeSpan(2, 0, 0, 0)).OrderBy(i => i.ExpirationDate);
             FridgeItems.AddRange(expiredItems);
             IsBusy = false;
         }

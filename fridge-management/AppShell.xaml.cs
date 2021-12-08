@@ -11,6 +11,7 @@ namespace fridge_management
             InitializeComponent();
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(NewFridgeItemPage), typeof(NewFridgeItemPage));
+            Routing.RegisterRoute(nameof(BarcodeScannerPage), typeof(BarcodeScannerPage));
             Routing.RegisterRoute(nameof(FridgeItemsPage), typeof(FridgeItemsPage));
             Routing.RegisterRoute(nameof(EditFridgeItemPage), typeof(EditFridgeItemPage));
             Routing.RegisterRoute(nameof(ShoppingListPage), typeof(ShoppingListPage));
