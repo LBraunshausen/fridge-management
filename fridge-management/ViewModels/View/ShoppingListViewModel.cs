@@ -13,6 +13,8 @@ namespace fridge_management.ViewModels
      ///     ViewModel which manages the connection between ShoppingListPage, NewShoppingListPage, EditShoppingListPage
      /// </summary>
     [QueryProperty(nameof(ShoppingListItemId), nameof(ShoppingListItemId))]
+    [QueryProperty(nameof(ShoppingListId), nameof(ShoppingListId))]
+ 
     public class ShoppingListViewModel : BaseViewModel
     {
         public ObservableRangeCollection<ShoppingListItem> Items { get; set; }
@@ -22,13 +24,24 @@ namespace fridge_management.ViewModels
         public Command OpenEditPageCommand { get; }
         public Command EditCommand { get; }
 
-        Guid shoppingListItemId;
-        public Guid ShoppingListItemId
+        string shoppingListItemId;
+        public string ShoppingListItemId
         {
             get => shoppingListItemId;
             set
             {
                 SetProperty(ref shoppingListItemId, value);
+                GetItem();
+            }
+        }
+
+        string shoppingListId;
+        public string ShoppingListId
+        {
+            get => shoppingListId;
+            set
+            {
+                SetProperty(ref shoppingListId, value);
                 GetItem();
             }
         }
@@ -142,7 +155,7 @@ namespace fridge_management.ViewModels
             if (SelectedItem == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?FridgeItemId={selectedItem.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListItemId={selectedItem.Id}");
         }
 
         /// <summary>
@@ -150,7 +163,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var item = await BaseService<ShoppingListItem>.GetById(ShoppingListItemId);
+            var item = await BaseService<ShoppingListItem>.GetById(Guid.Parse(ShoppingListItemId));
 
             SelectedItem = item;
         }
