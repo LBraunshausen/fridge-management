@@ -2,56 +2,40 @@
 using fridge_management.Services;
 using fridge_management.Views;
 using MvvmHelpers;
-using System.Collections.Generic;
-using System.Linq;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
 namespace fridge_management.ViewModels
-{    
-     /// <summary>
-     ///     ViewModel which manages the connection between ShoppingListPage, NewShoppingListPage, EditShoppingListPage
-     /// </summary>
-    [QueryProperty(nameof(ShoppingListItemId), nameof(ShoppingListItemId))]
-    public class ShoppingListViewModel : BaseViewModel
+{
+    /// <summary>
+    ///     ViewModel which manages the connection between ShoppingListPage, NewShoppingListPage, EditShoppingListPage
+    /// </summary>
+    [QueryProperty(nameof(ShoppingListId), nameof(ShoppingListId))]
+    public class ShoppingListListViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<ShoppingListItem> Items { get; set; }
+        public ObservableRangeCollection<ShoppingList> Items { get; set; }
         public Command OpenAddPageCommand { get; }
         public Command AddCommand { get; }
         public Command RemoveCommand { get; }
         public Command OpenEditPageCommand { get; }
         public Command EditCommand { get; }
 
-
-        private int shoppingListId;
+        int shoppingListId;
         public int ShoppingListId
         {
             get => shoppingListId;
             set
             {
-                if (value == shoppingListId)
-                    return;
-                shoppingListId = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        Guid shoppingListItemId;
-        public Guid ShoppingListItemId
-        {
-            get => shoppingListItemId;
-            set
-            {
-                SetProperty(ref shoppingListItemId, value);
+                SetProperty(ref shoppingListId, value);
                 GetItem();
             }
         }
 
 
-        private ShoppingListItem selectedItem;
-        public ShoppingListItem SelectedItem
+        private ShoppingList selectedItem;
+        public ShoppingList SelectedItem
         {
             get => selectedItem;
             set
@@ -63,43 +47,8 @@ namespace fridge_management.ViewModels
             }
         }
 
-        public string Text
-        {
-            get => selectedItem.Text;
-            set
-            {
-                if (value == selectedItem.Text)
-                    return;
-                selectedItem.Text = value;
-                OnPropertyChanged();
-            }
-        }
 
-        public DateTime ExpirationDate
-        {
-            get => selectedItem.ExpirationDate;
-            set
-            {
-                if (value == selectedItem.ExpirationDate)
-                    return;
-                selectedItem.ExpirationDate = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int Amount
-        {
-            get => selectedItem.Amount;
-            set
-            {
-                if (value == selectedItem.Amount)
-                    return;
-                selectedItem.Amount = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ShoppingListViewModel()
+        public ShoppingListListViewModel()
         {
             Title = "Einkaufslistenitems";
             OpenAddPageCommand = new Command(OpenAddPage);
@@ -107,10 +56,8 @@ namespace fridge_management.ViewModels
             RemoveCommand = new Command(Remove);
             OpenEditPageCommand = new Command(OpenEditPage);
             EditCommand = new Command(Edit);
-            Items = new ObservableRangeCollection<ShoppingListItem>();
-            selectedItem = new ShoppingListItem();
-            ExpirationDate = DateTime.Now;
-            Amount = 1;
+            Items = new ObservableRangeCollection<ShoppingList>();
+            selectedItem = new ShoppingList();
             Load();
 
             MessagingCenter.Subscribe<object, string>("MyApp", "Update",
@@ -135,7 +82,7 @@ namespace fridge_management.ViewModels
         private async void Add()
         {
             selectedItem.Id = new Guid();
-            await BaseService<ShoppingListItem>.Add(selectedItem);
+            await BaseService<ShoppingList>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
 
@@ -146,7 +93,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Remove()
         {
-            await BaseService<ShoppingListItem>.Delete(selectedItem.Id);
+            await BaseService<ShoppingList>.Delete(selectedItem.Id);
             Load();
         }
 
@@ -166,7 +113,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var item = await BaseService<ShoppingListItem>.GetById(ShoppingListItemId);
+            var item = await BaseService<ShoppingList>.GetById(ShoppingListId);
 
             SelectedItem = item;
         }
@@ -176,7 +123,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Edit()
         {
-            await BaseService<ShoppingListItem>.Edit(selectedItem);
+            await BaseService<ShoppingList>.Edit(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
@@ -188,11 +135,63 @@ namespace fridge_management.ViewModels
         {
             IsBusy = true;
             Items.Clear();
-            IEnumerable<ShoppingListItem> selectedItems = null;   
-            var items = await BaseService<ShoppingListItem>.GetItems();
-            selectedItems = items.Where(i => i.ShoppingListId == ShoppingListId);
-            Items.AddRange(selectedItems);
+            var items = await BaseService<ShoppingList>.GetItems();
+            Items.AddRange(items);
             IsBusy = false;
         }
+
+
+        /*public ShoppingListListViewModel()
+        {
+            Title = "Einkaufsliste";
+            AddCommand = new Command(Add);
+            DoubleClickCommand = new Command(DoubleClick);
+            RemoveCommand = new Command(Remove);
+            EditCommand = new Command(Edit);
+            Items = new ObservableRangeCollection<ShoppingList>();
+            Load();
+
+            MessagingCenter.Subscribe<object, string>("MyApp", "Update",
+              (sender, arg) =>
+                  {
+                      Load();
+                  }
+              );
+            var c = await BaseService<ShoppingList>.DropTable();
+
+        }
+
+        private async void Add()
+        {
+            await Shell.Current.GoToAsync(nameof(NewShoppingListListPage));
+        }
+
+        private async void DoubleClick()
+        {
+            //await Shell.Current.GoToAsync(nameof(ShoppingListPage));
+            await Shell.Current.GoToAsync($"{nameof(ShoppingListPage)}?ShoppingListId={selectedItem.ShoppingListId}");
+        }
+
+        private async void Remove()
+        {
+            await BaseService<ShoppingList>.Delete(selectedItem.Id);
+            Load();
+        }
+
+        private async void Edit()
+        {
+            if (SelectedItem == null)
+                return;
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListListViewModel)}?ItemId={selectedItem.Id}");
+        }
+
+        public async Task Load()
+        {
+            IsBusy = true;
+            Items.Clear();
+            var items = await BaseService<ShoppingList>.GetItems();
+            Items.AddRange(items);
+            IsBusy = false;
+        }*/
     }
 }

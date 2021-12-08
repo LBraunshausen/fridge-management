@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
-             x:Class="fridge_management.Views.EditShoppingListPage"
+             x:Class="fridge_management.Views.NewShoppingListListPage"
              xmlns:vm="clr-namespace:fridge_management.ViewModels"
              Title="{Binding Title}">
-
+    
     <ContentPage.BindingContext>
-        <vm:ShoppingListViewModel />
+        <vm:ShoppingListListViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
+        
         <StackLayout Orientation="Vertical">
             <Label Text="Produktname:" Margin="10,5,0,0"/>
-            <Entry Text="{Binding curItem}" Placeholder="Produktnamen hinzufügen" Margin="10,0"/>
+            <Entry Text="{Binding curItem.Text}" Placeholder="Einkaufsliste hinzufügen" Margin="10,0"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -22,14 +23,8 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Label Text="Menge:" Margin="10,0"/>
-                <Entry Text="{Binding curItem.Amount}" Margin="10,0" Grid.Column="0" Grid.Row="1"/>
-                <!--<Stepper x:Name="AmountStepper" Minimum="0" Increment="1" Grid.Column="1" Grid.Row="1"/>-->
-                <Label Text="Mindesthaltbarkeitsdatum:" Margin="10,0" Grid.Column="1" Grid.Row="0"/>
-
-                <DatePicker x:Name="DatePicker" Margin="10,5,0,0" Date="{Binding curItem.ExpirationDate}" Format="dd.MM.yyyy" Grid.Column="1" Grid.Row="1"/>
             </Grid>
-            <Button Text="Bearbeiten" Command="{Binding EditCommand}" Margin="10,0"/>
+            <Button Text="Speichern" Command="{Binding AddCommand}" Margin="10,0"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

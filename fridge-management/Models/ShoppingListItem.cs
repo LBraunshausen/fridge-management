@@ -1,12 +1,13 @@
 ﻿using SQLite;
 using System;
+using System.Collections.Generic;
 
 namespace fridge_management.Models
 {
     /// <summary>
-    /// Model which contains a FridgeItem
+    ///     Model which contains a ShoppingListItem
     /// </summary>
-    public class FridgeItem : IModel
+    public class ShoppingListItem : IModel
     {
         /// <summary>
         /// Contains an global unique identifier
@@ -14,16 +15,20 @@ namespace fridge_management.Models
         [PrimaryKey, AutoIncrement]
         public Guid Id { get; set; }
         /// <summary>
-        /// Contains the name of a FridgeItem
+        /// Contains the name of the item
         /// </summary>
         public string Text { get; set; }
         /// <summary>
-        /// Contains the expiration date of a FridgeItem
+        /// Contains the name of the item
         /// </summary>
         public DateTime ExpirationDate { get; set; }
         /// <summary>
-        /// Contains the amount date of a FridgeItem
+        /// Contains the amount of the item
         /// </summary>
         public int Amount { get; set; }
+        /// <summary>
+        /// Contains the number of the assigned shopping list
+        /// </summary>
+        public int ShoppingListId { get; set; }
     }
 }

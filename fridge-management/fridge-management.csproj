@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,21 +7,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />  
+    <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />  
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Edits\EditShoppingListListPage.xaml.cs">
+      <DependentUpon>EditShoppingListListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Edits\EditShoppingListPage.xaml.cs">
       <DependentUpon>EditShoppingListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\New\NewShoppingListListPage.xaml.cs">
+      <DependentUpon>NewShoppingListListPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\View\FridgeItemsPage.xaml.cs">
       <DependentUpon>FridgeItemsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\New\NewShoppingListItemPage.xaml.cs">
       <DependentUpon>NewShoppingListItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\View\ShoppingListListPage .xaml.cs">
+      <DependentUpon>ShoppingListListPage .xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\View\ShoppingListPage.xaml.cs">
       <DependentUpon>ShoppingListPage.xaml</DependentUpon>
@@ -36,6 +49,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\New\NewFridgeItemPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\View\BarcodeScannerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\View\HomePage.xaml">
