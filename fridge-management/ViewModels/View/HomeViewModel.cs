@@ -45,10 +45,8 @@ namespace fridge_management.ViewModels
             DateTime today = DateTime.Today;
             IEnumerable<FridgeItem> expiredItems = null;
 
-            foreach (FridgeItem item in fridgeItems)
-            {
-                expiredItems = fridgeItems.Where(i => i.ExpirationDate - today <= new TimeSpan(2, 0, 0, 0)).OrderBy(i => i.ExpirationDate);
-            }            
+            expiredItems = fridgeItems.Where<FridgeItem>(i => i.ExpirationDate - today <= new TimeSpan(2, 0, 0, 0)).OrderBy(i => i.ExpirationDate);
+
             FridgeItems.AddRange(expiredItems);
             IsBusy = false;
         }
