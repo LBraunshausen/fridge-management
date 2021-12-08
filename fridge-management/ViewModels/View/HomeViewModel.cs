@@ -42,15 +42,9 @@ namespace fridge_management.ViewModels
             // get all FridgeItems
             var fridgeItems = await BaseService<FridgeItem>.GetItems();
 
-
             DateTime today = DateTime.Today;
             IEnumerable<FridgeItem> expiredItems = null;
-
-            // iterate through fridgeItems and keep only expired items
-            foreach (FridgeItem item in fridgeItems)
-            {
-                expiredItems = fridgeItems.Where(i => i.ExpirationDate - today <= new TimeSpan(2, 0, 0, 0)).OrderBy(i => i.ExpirationDate);
-            }            
+            expiredItems = fridgeItems.Where<FridgeItem>(i => i.ExpirationDate - today <= new TimeSpan(2, 0, 0, 0)).OrderBy(i => i.ExpirationDate);
             FridgeItems.AddRange(expiredItems);
             IsBusy = false;
         }
