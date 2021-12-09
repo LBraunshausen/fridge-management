@@ -75,7 +75,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void OpenAddPage()
         {
-            await Shell.Current.GoToAsync(nameof(NewShoppingListItemPage));
+            await Shell.Current.GoToAsync(nameof(NewShoppingListListPage));
         }
 
         /// <summary>
@@ -84,9 +84,11 @@ namespace fridge_management.ViewModels
         private async void Add()
         {
             selectedItem.Id = new Guid();
+            selectedItem.ShoppingListId = new Guid();
+            ShoppingListId = Convert.ToString(selectedItem.ShoppingListId);
             await BaseService<ShoppingList>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
-            await Application.Current.MainPage.Navigation.PopAsync();
+            await Application.Current.MainPage.Navigation.PopAsync(); 
 
         }
 

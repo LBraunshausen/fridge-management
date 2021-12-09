@@ -21,6 +21,6 @@ namespace fridge_management.Models
         /// <summary>
         /// Contains the number of the shopping list
         /// </summary>
-        public int ShoppingListId { get; set; }
+        public Guid ShoppingListId { get; set; }
     }
 }

@@ -136,6 +136,7 @@ namespace fridge_management.ViewModels
         private async void Add()
         {
             selectedItem.Id = new Guid();
+            selectedItem.ShoppingListId = Guid.Parse(ShoppingListId);
             await BaseService<ShoppingListItem>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
@@ -187,11 +188,12 @@ namespace fridge_management.ViewModels
         /// </summary>
         public async Task Load()
         {
+            
             IsBusy = true;
             Items.Clear();
             IEnumerable<ShoppingListItem> selectedItems = null;   
             var items = await BaseService<ShoppingListItem>.GetItems();
-            selectedItems = items.Where(i => i.ShoppingListId == ShoppingListId);
+            selectedItems = items.Where(i => i.ShoppingListId == Guid.Parse(ShoppingListId));
             Items.AddRange(selectedItems);
             IsBusy = false;
         }
