@@ -160,7 +160,9 @@ namespace fridge_management.ViewModels
             if (SelectedItem == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListItemId={selectedItem.Id}");
+            var id = Convert.ToString(selectedItem.Id);
+
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListItemId={id}");
         }
 
         /// <summary>

@@ -114,7 +114,7 @@ namespace fridge_management.ViewModels
             if (SelectedItem == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListId={selectedItem.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListId={Convert.ToString(selectedItem.Id)}");
         }
 
         /// <summary>
