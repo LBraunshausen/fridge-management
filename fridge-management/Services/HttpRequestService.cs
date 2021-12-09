@@ -21,7 +21,7 @@ namespace fridge_management.Services
         public static JObject getItemByEan(string ean)
         {
             string url = "https://api.barcodelookup.com/v3/products";
-            string key = "646red6gh2dtletavgcn981205sywe";
+            string key = "gduz5w44koae1qly0qu6d28a6qy8nk";
          
             // create http connection
             HttpClient client = new HttpClient();

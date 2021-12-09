@@ -10,9 +10,9 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Command="{Binding AddCommand}" />
+        <ToolbarItem Text="+" Command="{Binding OpenAddPageCommand}" />
         <ToolbarItem Text="-" Command="{Binding RemoveCommand}"/>
-        <ToolbarItem Command="{Binding EditCommand}" Icon="edit_icon.png"/>
+        <ToolbarItem Command="{Binding OpenEditPageCommand}" Icon="edit_icon.png"/>
 
     </ContentPage.ToolbarItems> 
 
@@ -22,7 +22,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemSelected="{Binding DoubleClickCommand}">
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <ListView.ItemTemplate >
                 <DataTemplate>
                     <ViewCell >
@@ -36,8 +36,6 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <Label Text="{Binding Text}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Margin="20,0"/>
-                            <Label Text="{Binding ExpirationDate, StringFormat='{0:dd.MM.yyyy}'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="1"/>
-                            <Label Text="{Binding Amount, StringFormat='{0:}x'}" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" Grid.Column="2"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

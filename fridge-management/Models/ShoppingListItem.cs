@@ -12,7 +12,7 @@ namespace fridge_management.Models
         /// <summary>
         /// Contains an global unique identifier
         /// </summary>
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public Guid Id { get; set; }
         /// <summary>
         /// Contains the name of the item
@@ -29,6 +29,6 @@ namespace fridge_management.Models
         /// <summary>
         /// Contains the number of the assigned shopping list
         /// </summary>
-        public int ShoppingListId { get; set; }
+        public Guid ShoppingListId { get; set; }
     }
 }

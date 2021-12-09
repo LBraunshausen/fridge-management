@@ -13,7 +13,7 @@
         
         <StackLayout Orientation="Vertical">
             <Label Text="Produktname:" Margin="10,5,0,0"/>
-            <Entry Text="{Binding curItem.Text}" Placeholder="Einkaufsliste hinzufügen" Margin="10,0"/>
+            <Entry Text="{Binding SelectedItem.Text, Mode=TwoWay}" Placeholder="Einkaufsliste hinzufügen" Margin="10,0"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
