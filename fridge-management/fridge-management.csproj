@@ -18,14 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Edits\EditShoppingListListPage.xaml.cs">
-      <DependentUpon>EditShoppingListListPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Edits\EditShoppingListPage.xaml.cs">
       <DependentUpon>EditShoppingListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\New\NewShoppingListListPage.xaml.cs">
-      <DependentUpon>NewShoppingListListPage.xaml</DependentUpon>
+    <Compile Update="Views\Edits\EditShoppingListItemPage.xaml.cs">
+      <DependentUpon>EditShoppingListItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\New\NewShoppingListPage.xaml.cs">
+      <DependentUpon>NewShoppingListPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\View\FridgeItemsPage.xaml.cs">
       <DependentUpon>FridgeItemsPage.xaml</DependentUpon>
@@ -33,11 +33,11 @@
     <Compile Update="Views\New\NewShoppingListItemPage.xaml.cs">
       <DependentUpon>NewShoppingListItemPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\View\ShoppingListListPage .xaml.cs">
-      <DependentUpon>ShoppingListListPage .xaml</DependentUpon>
+    <Compile Update="Views\View\ShoppingListPage .xaml.cs">
+      <DependentUpon>ShoppingListPage .xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\View\ShoppingListPage.xaml.cs">
-      <DependentUpon>ShoppingListPage.xaml</DependentUpon>
+    <Compile Update="Views\View\ShoppingListÍtemPage.xaml.cs">
+      <DependentUpon>ShoppingListÍtemPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -45,7 +45,7 @@
     <EmbeddedResource Update="Views\Edits\EditFridgeItemPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Edits\EditShoppingListPage.xaml">
+    <EmbeddedResource Update="Views\Edits\EditShoppingListItemPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\New\NewFridgeItemPage.xaml">
@@ -57,7 +57,7 @@
     <EmbeddedResource Update="Views\View\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\View\ShoppingListPage.xaml">
+    <EmbeddedResource Update="Views\View\ShoppingListÍtemPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

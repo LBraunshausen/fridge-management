@@ -226,7 +226,7 @@ namespace fridge_management.ViewModels
             // generate new guid
             selectedItem.Id = new Guid();
             // add item to database
-            await BaseService<FridgeItem>.Add(selectedItem);
+            await DBService<FridgeItem>.Add(selectedItem);
             // update listview
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
@@ -238,7 +238,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Remove()
         {
-            await BaseService<FridgeItem>.Delete(selectedItem.Id);
+            await DBService<FridgeItem>.Delete(selectedItem.Id);
             Load();
         }
 
@@ -258,7 +258,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var fridgeItem = await BaseService<FridgeItem>.GetById(FridgeItemId);
+            var fridgeItem = await DBService<FridgeItem>.GetById(FridgeItemId);
 
             SelectedItem = fridgeItem;            
         }
@@ -268,7 +268,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Edit()
         {
-            await BaseService<FridgeItem>.Edit(selectedItem);
+            await DBService<FridgeItem>.Edit(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
@@ -282,7 +282,7 @@ namespace fridge_management.ViewModels
             // clear listview
             FridgeItems.Clear();
             // get list of all FridgeItems
-            var fridgeItems = await BaseService<FridgeItem>.GetItems();
+            var fridgeItems = await DBService<FridgeItem>.GetItems();
             FridgeItems.AddRange(fridgeItems);
             IsBusy = false;
         }
