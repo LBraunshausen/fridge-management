@@ -16,7 +16,7 @@ namespace fridge_management_Test
         [TestMethod]
         public void TestAdd()
         {
-            ShoppingListViewModel vm = new ShoppingListViewModel();
+            ShoppingListItemViewModel vm = new ShoppingListItemViewModel();
 
             if (vm.AddCommand.CanExecute(null))
                 vm.AddCommand.Execute(null);
