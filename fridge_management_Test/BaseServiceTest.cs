@@ -10,7 +10,7 @@ using System.Collections;
 namespace fridge_management_Test
 {
     [TestClass]
-    public class BaseServiceTest
+    public class DBServiceTest
     {
         [TestMethod]
         public void TestAdd()
@@ -25,10 +25,10 @@ namespace fridge_management_Test
             
             Task task = Task.Run(async () =>
             {
-                await BaseService<FridgeItem>.Add(addItem);
+                await DBService<FridgeItem>.Add(addItem);
                 FridgeItem fridgeItem = null;
 
-                fridgeItem = await BaseService<FridgeItem>.GetById(addItem.Id);
+                fridgeItem = await DBService<FridgeItem>.GetById(addItem.Id);
 
                 Assert.AreEqual(addItem.Id, fridgeItem.Id, "not equal");
             });
@@ -48,10 +48,10 @@ namespace fridge_management_Test
 
             Task task = Task.Run(async () =>
             {
-                await BaseService<FridgeItem>.Add(addItem);
+                await DBService<FridgeItem>.Add(addItem);
                 FridgeItem fridgeItem = null;
 
-                var fridgeItems = (ICollection)await BaseService<FridgeItem>.GetItems();
+                var fridgeItems = (ICollection)await DBService<FridgeItem>.GetItems();
 
                 Assert.IsTrue(fridgeItems.Count > 0); 
             });
@@ -71,14 +71,14 @@ namespace fridge_management_Test
 
             Task task = Task.Run(async () =>
             {
-                await BaseService<FridgeItem>.Add(addItem);
+                await DBService<FridgeItem>.Add(addItem);
                 FridgeItem fridgeItem = null;
 
 
                 addItem.Text = "Testprodukt2";
-                await BaseService<FridgeItem>.Edit(addItem);
+                await DBService<FridgeItem>.Edit(addItem);
 
-                fridgeItem = await BaseService<FridgeItem>.GetById(addItem.Id);
+                fridgeItem = await DBService<FridgeItem>.GetById(addItem.Id);
 
                 Assert.AreEqual(addItem.Text, fridgeItem.Text, "not equal");                
             });
@@ -90,9 +90,9 @@ namespace fridge_management_Test
         {
             Task task = Task.Run(async () =>
             {
-                await BaseService<FridgeItem>.DeleteAll();
+                await DBService<FridgeItem>.DeleteAll();
 
-                var fridgeItems = (ICollection)await BaseService<FridgeItem>.GetItems();
+                var fridgeItems = (ICollection)await DBService<FridgeItem>.GetItems();
 
                 Assert.IsTrue(fridgeItems.Count == 0);
             });
@@ -111,11 +111,11 @@ namespace fridge_management_Test
 
             Task.Run(async () =>
             {
-                await BaseService<FridgeItem>.Add(item);
+                await DBService<FridgeItem>.Add(item);
 
-                await BaseService<FridgeItem>.Delete(item.Id);
+                await DBService<FridgeItem>.Delete(item.Id);
 
-                var item1 = await BaseService<FridgeItem>.GetById(item.Id);
+                var item1 = await DBService<FridgeItem>.GetById(item.Id);
 
                 Assert.AreEqual(1, 1);
             });

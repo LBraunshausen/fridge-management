@@ -40,7 +40,7 @@ namespace fridge_management.ViewModels
             IsBusy = true;
             FridgeItems.Clear();
             // get all FridgeItems
-            var fridgeItems = await BaseService<FridgeItem>.GetItems();
+            var fridgeItems = await DBService<FridgeItem>.GetItems();
 
             DateTime today = DateTime.Today;
             IEnumerable<FridgeItem> expiredItems = null;

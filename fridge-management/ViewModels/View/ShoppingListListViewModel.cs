@@ -86,7 +86,7 @@ namespace fridge_management.ViewModels
             selectedItem.Id = new Guid();
             selectedItem.ShoppingListId = new Guid();
             ShoppingListId = Convert.ToString(selectedItem.ShoppingListId);
-            await BaseService<ShoppingList>.Add(selectedItem);
+            await DBService<ShoppingList>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync(); 
 
@@ -97,13 +97,15 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Remove()
         {
-            await BaseService<ShoppingList>.Delete(selectedItem.Id);
+            await DBService<ShoppingList>.Delete(selectedItem.Id);
             Load();
         }
 
         private async void DoubleClick()
         {
-            await Shell.Current.GoToAsync($"{nameof(ShoppingListPage)}?ShoppingListId={ShoppingListId}");
+            var id = Convert.ToString(selectedItem.Id);
+
+            await Shell.Current.GoToAsync($"{nameof(ShoppingListPage)}?ShoppingListId={id}");
         }
 
         /// <summary>
@@ -114,7 +116,9 @@ namespace fridge_management.ViewModels
             if (SelectedItem == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListId={Convert.ToString(selectedItem.Id)}");
+            var id = Convert.ToString(selectedItem.Id);
+
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListId={id}");
         }
 
         /// <summary>
@@ -122,7 +126,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var item = await BaseService<ShoppingList>.GetById(Guid.Parse(ShoppingListId));
+            var item = await DBService<ShoppingList>.GetById(Guid.Parse(ShoppingListId));
 
             SelectedItem = item;
         }
@@ -132,7 +136,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Edit()
         {
-            await BaseService<ShoppingList>.Edit(selectedItem);
+            await DBService<ShoppingList>.Edit(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
@@ -144,63 +148,10 @@ namespace fridge_management.ViewModels
         {
             IsBusy = true;
             Items.Clear();
-            var items = await BaseService<ShoppingList>.GetItems();
+            var items = await DBService<ShoppingList>.GetItems();
             Items.AddRange(items);
             IsBusy = false;
         }
 
-
-        /*public ShoppingListListViewModel()
-        {
-            Title = "Einkaufsliste";
-            AddCommand = new Command(Add);
-            DoubleClickCommand = new Command(DoubleClick);
-            RemoveCommand = new Command(Remove);
-            EditCommand = new Command(Edit);
-            Items = new ObservableRangeCollection<ShoppingList>();
-            Load();
-
-            MessagingCenter.Subscribe<object, string>("MyApp", "Update",
-              (sender, arg) =>
-                  {
-                      Load();
-                  }
-              );
-            var c = await BaseService<ShoppingList>.DropTable();
-
-        }
-
-        private async void Add()
-        {
-            await Shell.Current.GoToAsync(nameof(NewShoppingListListPage));
-        }
-
-        private async void DoubleClick()
-        {
-            //await Shell.Current.GoToAsync(nameof(ShoppingListPage));
-            await Shell.Current.GoToAsync($"{nameof(ShoppingListPage)}?ShoppingListId={selectedItem.ShoppingListId}");
-        }
-
-        private async void Remove()
-        {
-            await BaseService<ShoppingList>.Delete(selectedItem.Id);
-            Load();
-        }
-
-        private async void Edit()
-        {
-            if (SelectedItem == null)
-                return;
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListListViewModel)}?ItemId={selectedItem.Id}");
-        }
-
-        public async Task Load()
-        {
-            IsBusy = true;
-            Items.Clear();
-            var items = await BaseService<ShoppingList>.GetItems();
-            Items.AddRange(items);
-            IsBusy = false;
-        }*/
     }
 }

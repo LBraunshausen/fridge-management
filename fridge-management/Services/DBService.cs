@@ -12,7 +12,7 @@ namespace fridge_management.Services
     ///     The BaseService implements the methods for the sqlite connection. This service is a generic class, so it can be called to connect to every database table.
     /// </summary>
     /// <typeparam name="T">is the generic identifier. With "T" it is possible to call this service for every database table</typeparam>
-    public class BaseService<T> where T : IModel, new()
+    public class DBService<T> where T : IModel, new()
     {
 
         static SQLiteAsyncConnection db;

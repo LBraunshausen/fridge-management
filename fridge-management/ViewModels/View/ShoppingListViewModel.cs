@@ -137,7 +137,7 @@ namespace fridge_management.ViewModels
         {
             selectedItem.Id = new Guid();
             selectedItem.ShoppingListId = Guid.Parse(ShoppingListId);
-            await BaseService<ShoppingListItem>.Add(selectedItem);
+            await DBService<ShoppingListItem>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
 
@@ -148,7 +148,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Remove()
         {
-            await BaseService<ShoppingListItem>.Delete(selectedItem.Id);
+            await DBService<ShoppingListItem>.Delete(selectedItem.Id);
             Load();
         }
 
@@ -170,7 +170,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var item = await BaseService<ShoppingListItem>.GetById(Guid.Parse(ShoppingListItemId));
+            var item = await DBService<ShoppingListItem>.GetById(Guid.Parse(ShoppingListItemId));
 
             SelectedItem = item;
         }
@@ -180,7 +180,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Edit()
         {
-            await BaseService<ShoppingListItem>.Edit(selectedItem);
+            await DBService<ShoppingListItem>.Edit(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
         }
@@ -194,7 +194,7 @@ namespace fridge_management.ViewModels
             IsBusy = true;
             Items.Clear();
             IEnumerable<ShoppingListItem> selectedItems = null;   
-            var items = await BaseService<ShoppingListItem>.GetItems();
+            var items = await DBService<ShoppingListItem>.GetItems();
             selectedItems = items.Where(i => i.ShoppingListId == Guid.Parse(ShoppingListId));
             Items.AddRange(selectedItems);
             IsBusy = false;
