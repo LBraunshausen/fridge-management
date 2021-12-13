@@ -29,6 +29,13 @@ namespace fridge_management.ViewModels
             Title = "Startseite";
             FridgeItems = new ObservableRangeCollection<FridgeItem>();
             Load();
+
+            MessagingCenter.Subscribe<object, string>("MyApp", "Update",
+              (sender, arg) =>
+              {
+                  Load();
+              }
+            );
         }
 
         /// <summary>
