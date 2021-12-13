@@ -21,7 +21,7 @@ namespace fridge_management.Services
         public static JObject getItemByEan(string ean)
         {
             string url = "https://api.barcodelookup.com/v3/products";
-            string key = "gduz5w44koae1qly0qu6d28a6qy8nk";
+            string key = "646red6gh2dtletavgcn981205sywe";
          
             // create http connection
             HttpClient client = new HttpClient();
@@ -32,7 +32,7 @@ namespace fridge_management.Services
             // List data response.
             HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
-            {                
+            {
                 // Parse the response body.
                 var dataObject = response.Content.ReadAsAsync<JObject>().Result;                
                 return dataObject;

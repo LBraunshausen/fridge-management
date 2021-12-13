@@ -14,12 +14,12 @@ namespace fridge_management
             Routing.RegisterRoute(nameof(BarcodeScannerPage), typeof(BarcodeScannerPage));
             Routing.RegisterRoute(nameof(FridgeItemsPage), typeof(FridgeItemsPage));
             Routing.RegisterRoute(nameof(EditFridgeItemPage), typeof(EditFridgeItemPage));
-            Routing.RegisterRoute(nameof(ShoppingListItemPage), typeof(ShoppingListItemPage));
             Routing.RegisterRoute(nameof(ShoppingListPage), typeof(ShoppingListPage));
+            Routing.RegisterRoute(nameof(ShoppingListItemPage), typeof(ShoppingListItemPage));
             Routing.RegisterRoute(nameof(NewShoppingListItemPage), typeof(NewShoppingListItemPage));
             Routing.RegisterRoute(nameof(NewShoppingListPage), typeof(NewShoppingListPage));
-            Routing.RegisterRoute(nameof(EditShoppingListPage), typeof(EditShoppingListPage));
             Routing.RegisterRoute(nameof(EditShoppingListItemPage), typeof(EditShoppingListItemPage));
+            Routing.RegisterRoute(nameof(EditShoppingListPage), typeof(EditShoppingListPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

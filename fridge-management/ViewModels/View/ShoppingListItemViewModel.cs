@@ -162,7 +162,7 @@ namespace fridge_management.ViewModels
 
             var id = Convert.ToString(selectedItem.Id);
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListItemId={id}");
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListItemPage)}?ShoppingListItemId={id}");
         }
 
         /// <summary>
