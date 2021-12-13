@@ -22,7 +22,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+        <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemTapped="{Binding ClickCommand}">
             <ListView.ItemTemplate >
                 <DataTemplate>
                     <ViewCell >

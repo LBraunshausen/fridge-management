@@ -11,7 +11,7 @@ namespace fridge_management.Models
         /// <summary>
         /// Contains an global unique identifier
         /// </summary>
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public Guid Id { get; set; }
         /// <summary>
         /// Contains the name of a FridgeItem

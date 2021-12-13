@@ -3,6 +3,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 

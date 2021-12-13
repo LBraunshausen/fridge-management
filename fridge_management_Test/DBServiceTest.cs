@@ -49,7 +49,6 @@ namespace fridge_management_Test
             Task task = Task.Run(async () =>
             {
                 await DBService<FridgeItem>.Add(addItem);
-                FridgeItem fridgeItem = null;
 
                 var fridgeItems = (ICollection)await DBService<FridgeItem>.GetItems();
 
@@ -117,7 +116,8 @@ namespace fridge_management_Test
 
                 var item1 = await DBService<FridgeItem>.GetById(item.Id);
 
-                Assert.AreEqual(1, 1);
+                //Assert.AreEqual(1, 1);
+                Assert.IsNull(item1);
             });
 
 

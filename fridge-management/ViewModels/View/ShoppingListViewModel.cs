@@ -2,34 +2,38 @@
 using fridge_management.Services;
 using fridge_management.Views;
 using MvvmHelpers;
+using System.Collections.Generic;
+using System.Linq;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
 namespace fridge_management.ViewModels
-{
-    /// <summary>
-    ///     ViewModel which manages the connection between ShoppingListPage, NewShoppingListPage, EditShoppingListPage
-    /// </summary>
-    [QueryProperty(nameof(ShoppingListId), nameof(ShoppingListId))]
+{    
+     /// <summary>
+     ///     ViewModel which manages the connection between ShoppingListPage, NewShoppingListPage, EditShoppingListPage
+     /// </summary>
+    [QueryProperty(nameof(ShoppingListItemId), nameof(ShoppingListItemId))]
     public class ShoppingListViewModel : BaseViewModel
     {
         public ObservableRangeCollection<ShoppingList> Items { get; set; }
         public Command OpenAddPageCommand { get; }
         public Command AddCommand { get; }
-        public Command DoubleClickCommand { get; set; }
         public Command RemoveCommand { get; }
         public Command OpenEditPageCommand { get; }
+        public Command ClickCommand { get; set; }
         public Command EditCommand { get; }
 
-        string shoppingListId;
-        public string ShoppingListId
+
+        
+        string shoppingListItemId;
+        public string ShoppingListItemId
         {
-            get => shoppingListId;
+            get => shoppingListItemId;
             set
             {
-                SetProperty(ref shoppingListId, value);
+                SetProperty(ref shoppingListItemId, value);
                 GetItem();
             }
         }
@@ -48,6 +52,18 @@ namespace fridge_management.ViewModels
             }
         }
 
+        public string Text
+        {
+            get => selectedItem.Text;
+            set
+            {
+                if (value == selectedItem.Text)
+                    return;
+                selectedItem.Text = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public ShoppingListViewModel()
         {
@@ -55,9 +71,9 @@ namespace fridge_management.ViewModels
             OpenAddPageCommand = new Command(OpenAddPage);
             AddCommand = new Command(Add);
             RemoveCommand = new Command(Remove);
-            DoubleClickCommand = new Command(DoubleClick);
             OpenEditPageCommand = new Command(OpenEditPage);
             EditCommand = new Command(Edit);
+            ClickCommand = new Command(Click);
             Items = new ObservableRangeCollection<ShoppingList>();
             selectedItem = new ShoppingList();
             Load();
@@ -84,11 +100,9 @@ namespace fridge_management.ViewModels
         private async void Add()
         {
             selectedItem.Id = new Guid();
-            selectedItem.ShoppingListId = new Guid();
-            ShoppingListId = Convert.ToString(selectedItem.ShoppingListId);
             await DBService<ShoppingList>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
-            await Application.Current.MainPage.Navigation.PopAsync(); 
+            await Application.Current.MainPage.Navigation.PopAsync();
 
         }
 
@@ -101,13 +115,6 @@ namespace fridge_management.ViewModels
             Load();
         }
 
-        private async void DoubleClick()
-        {
-            var id = Convert.ToString(selectedItem.Id);
-
-            await Shell.Current.GoToAsync($"{nameof(ShoppingListPage)}?ShoppingListId={id}");
-        }
-
         /// <summary>
         ///     The OpenEditPage method opens a new EditShoppingListPage if an item is selected.
         /// </summary>
@@ -116,9 +123,15 @@ namespace fridge_management.ViewModels
             if (SelectedItem == null)
                 return;
 
-            var id = Convert.ToString(selectedItem.Id);
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListItemId={selectedItem.Id}");
+        }
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListId={id}");
+        private async void Click()
+        {
+            if (SelectedItem == null)
+                return;
+
+            await Shell.Current.GoToAsync($"{nameof(ShoppingListItemPage)}?ShoppingListId={selectedItem.Id}");
         }
 
         /// <summary>
@@ -126,7 +139,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var item = await DBService<ShoppingList>.GetById(Guid.Parse(ShoppingListId));
+            var item = await DBService<ShoppingList>.GetById(Guid.Parse(ShoppingListItemId));
 
             SelectedItem = item;
         }
@@ -149,9 +162,9 @@ namespace fridge_management.ViewModels
             IsBusy = true;
             Items.Clear();
             var items = await DBService<ShoppingList>.GetItems();
+            //selectedItems = items.Where(i => i.ShoppingListId == selectedItem.Id);
             Items.AddRange(items);
             IsBusy = false;
         }
-
     }
 }
