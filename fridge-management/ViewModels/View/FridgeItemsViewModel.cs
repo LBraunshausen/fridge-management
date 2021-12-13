@@ -105,12 +105,12 @@ namespace fridge_management.ViewModels
         /// Contains the FridgeItemId which is passed by Queryproperties
         /// </summary>
         string fridgeItemId;
-        public Guid FridgeItemId
+        public string FridgeItemId
         {
-            get => Guid.Parse(fridgeItemId);
+            get => fridgeItemId;
             set
             {
-                SetProperty(ref fridgeItemId, value.ToString());
+                SetProperty(ref fridgeItemId, value);
                 GetItem();
             }
         }
@@ -258,7 +258,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var fridgeItem = await DBService<FridgeItem>.GetById(FridgeItemId);
+            var fridgeItem = await DBService<FridgeItem>.GetById(Guid.Parse(FridgeItemId));
 
             SelectedItem = fridgeItem;            
         }
