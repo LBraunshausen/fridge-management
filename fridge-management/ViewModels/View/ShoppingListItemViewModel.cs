@@ -135,7 +135,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Add()
         {
-            selectedItem.Id = new Guid();
+            selectedItem.Id = Guid.NewGuid();
             selectedItem.ShoppingListId = Guid.Parse(ShoppingListId);
             await DBService<ShoppingListItem>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
