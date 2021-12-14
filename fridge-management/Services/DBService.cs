@@ -54,8 +54,6 @@ namespace fridge_management.Services
         /// <returns></returns>
         public static async Task DropTable()
         {
-            await Init();
-
             await db.DropTableAsync<T>();
         }
 
