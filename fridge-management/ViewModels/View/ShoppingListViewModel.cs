@@ -49,6 +49,7 @@ namespace fridge_management.ViewModels
                     return;
                 selectedItem = value;
                 OnPropertyChanged();
+                Click();
             }
         }
 
@@ -60,7 +61,7 @@ namespace fridge_management.ViewModels
                 if (value == selectedItem.Text)
                     return;
                 selectedItem.Text = value;
-                OnPropertyChanged();
+                OnPropertyChanged();                
             }
         }
 
@@ -99,7 +100,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void Add()
         {
-            selectedItem.Id = new Guid();
+            selectedItem.Id = Guid.NewGuid();
             await DBService<ShoppingList>.Add(selectedItem);
             MessagingCenter.Send<object, string>("MyApp", "Update", "List");
             await Application.Current.MainPage.Navigation.PopAsync();
@@ -129,8 +130,7 @@ namespace fridge_management.ViewModels
         private async void Click()
         {
             if (SelectedItem == null)
-                return;
-
+                return;            
             await Shell.Current.GoToAsync($"{nameof(ShoppingListItemPage)}?ShoppingListId={selectedItem.Id}");
         }
 
