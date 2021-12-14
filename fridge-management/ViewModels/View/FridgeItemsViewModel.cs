@@ -224,7 +224,7 @@ namespace fridge_management.ViewModels
         private async void Add()
         {
             // generate new guid
-            selectedItem.Id = new Guid();
+            selectedItem.Id = Guid.NewGuid();
             // add item to database
             await DBService<FridgeItem>.Add(selectedItem);
             // update listview
