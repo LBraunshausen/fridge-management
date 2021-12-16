@@ -46,7 +46,7 @@ namespace fridge_management.ViewModels
             set
             {
                 SetProperty(ref shoppingListId, value);
-                GetItem();
+                Load();
             }
         }
 
@@ -112,7 +112,7 @@ namespace fridge_management.ViewModels
             selectedItem = new ShoppingListItem();
             ExpirationDate = DateTime.Now;
             Amount = 1;
-            Load();
+            //Load();
 
             MessagingCenter.Subscribe<object, string>("MyApp", "Update",
               (sender, arg) =>
@@ -189,11 +189,10 @@ namespace fridge_management.ViewModels
         ///     The Load method loads all ShoppingListItems and adds them to the view
         /// </summary>
         public async Task Load()
-        {
-            
+        {            
             IsBusy = true;
             Items.Clear();
-            IEnumerable<ShoppingListItem> selectedItems = null;   
+            IEnumerable<ShoppingListItem> selectedItems = null;
             var items = await DBService<ShoppingListItem>.GetItems();
             selectedItems = items.Where(i => i.ShoppingListId == Guid.Parse(ShoppingListId));
             Items.AddRange(selectedItems);
