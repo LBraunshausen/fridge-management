@@ -14,7 +14,7 @@ namespace fridge_management.ViewModels
      /// <summary>
      ///     ViewModel which manages the connection between ShoppingListPage, NewShoppingListPage, EditShoppingListPage
      /// </summary>
-    [QueryProperty(nameof(ShoppingListItemId), nameof(ShoppingListItemId))]
+    [QueryProperty(nameof(ShoppingListId), nameof(ShoppingListId))]
     public class ShoppingListViewModel : BaseViewModel
     {
         public ObservableRangeCollection<ShoppingList> Items { get; set; }
@@ -27,13 +27,13 @@ namespace fridge_management.ViewModels
 
 
         
-        string shoppingListItemId;
-        public string ShoppingListItemId
+        string shoppingListId;
+        public string ShoppingListId
         {
-            get => shoppingListItemId;
+            get => shoppingListId;
             set
             {
-                SetProperty(ref shoppingListItemId, value);
+                SetProperty(ref shoppingListId, value);
                 GetItem();
             }
         }
@@ -124,7 +124,7 @@ namespace fridge_management.ViewModels
             if (SelectedItem == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListItemId={selectedItem.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EditShoppingListPage)}?ShoppingListId={selectedItem.Id}");
         }
 
         private async void Click()
@@ -139,7 +139,7 @@ namespace fridge_management.ViewModels
         /// </summary>
         private async void GetItem()
         {
-            var item = await DBService<ShoppingList>.GetById(Guid.Parse(ShoppingListItemId));
+            var item = await DBService<ShoppingList>.GetById(Guid.Parse(ShoppingListId));
 
             SelectedItem = item;
         }
