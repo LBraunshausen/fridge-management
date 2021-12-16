@@ -19,6 +19,12 @@
     <!--Define Controls-->
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView HorizontalOptions="Center">
+                    <Image Source="logo.png" HorizontalOptions="Center" HeightRequest="256"/>
+                </ContentView>
+            </StackLayout>
+            
             <Label Text="Ablaufende Produkte" FontAttributes="Bold" FontSize="24"/>
             <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding FridgeItems}">
                 <ListView.ItemTemplate>
